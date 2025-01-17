@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PasienController;
@@ -28,7 +29,7 @@ Route::resource('pasien', PasienController::class) ;
 Route::resource('poli', PoliController::class) ;
 Route::resource('home', HomeController::class) ;
 Route::resource('user', UserController::class) ;
-
 Route::resource('profil', ProfilController::class);
+Route::resource('administrasi', AdministrasiController::class);
 
 require __DIR__.'/auth.php';
