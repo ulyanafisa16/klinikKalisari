@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header">TAMBAH DOKTER</div>
         <div class="card-body">
-            {{-- <form action="/dokter" method="POST" enctype="multipart/form-data">
+            <form action="/dokter" method="POST" enctype="multipart/form-data">
                 @method('POST')
                 @csrf
                 <div class="form-group mt-1">
@@ -75,7 +75,7 @@
                 <div class="form-group mt-2">
                     <button type="submit" class="btn btn-primary">SIMPAN</button>
                 </div>
-            </form> --}}
+            </form>
         </div>
     </div>
 @endsection

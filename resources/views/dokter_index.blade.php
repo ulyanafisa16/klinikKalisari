@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header"></div>
+        <div class="card-header">{{ $judul }}</div>
         <div class="card-body">
             <a href="/dokter/create" class="btn btn-primary mb-2">Tambah Dokter</a>
             <table class="table table-bordered table-hover">
@@ -15,7 +15,7 @@
                         <th width="22%">Aksi</th>
                     </tr>
                 </thead>
-                {{-- <tbody>
+                <tbody>
                     @foreach ($dokter as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
@@ -40,7 +40,7 @@
                                 </div>
                             </td>
                             <td>
-                                {{ $item->administrasi->count() }}
+                                {{-- {{ $item->administrasi->count() }} --}}
                             </td>
                             <td>
                                 <a href="/dokter/{{ $item->id }}" class="btn btn-info">
@@ -58,7 +58,7 @@
                             </td>
                         </tr>
                     @endforeach
-                </tbody> --}}
+                </tbody>
             </table>
         </div>
     </div>
