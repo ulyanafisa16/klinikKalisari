@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="card">
-        {{-- <div class="card-header">{{ $judul }}</div> --}}
+        <div class="card-header">{{ $judul }}</div>
         <div class="card-body">
-            {{-- <form action="/pasien" method="POST">
+            <form action="/pasien" method="POST">
                 @method('POST')
                 @csrf
                 <div class="row mb-3">
@@ -39,23 +39,6 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="ss">Status Menikah</label>
-                        <div class="form-check ml-3">
-                            <input type="radio" name="status" value="Sudah Menikah" class="form-check-input"
-                                id="sm" {{ old('status') == 'Sudah Menikah' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="sm">
-                                Sudah Menikah
-                            </label>
-                        </div>
-                        <div class="form-check ml-3">
-                            <input type="radio" name="status" value="Belum Menikah" class="form-check-input"
-                                id="bm" {{ old('status') == 'Belum Menikah' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="bm">
-                                Belum Menikah
-                            </label>
-                        </div>
-                    </div>
                 </div>
                 <div class="form-group mt-3">
                     <label for="alamat">NIK</label>
@@ -70,7 +53,7 @@
                 <div class="form-group mt-2">
                     <button type="submit" class="btn btn-primary">SIMPAN</button>
                 </div>
-            </form> --}}
+            </form>
         </div>
     </div>
 @endsection

@@ -25,21 +25,31 @@
                     <tr>
                         <th>ID</th>
                         <th>Kode</th>
-                        <th>Poli</th>
+                        <th>Dokter</th>
                         <th>Nama</th>
+                        <th>Nik</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Tempat tanggal lahir</th>
                         <th>Nomor HP</th>
+                        <th>Alamat</th>
+                        <th>No Antrian</th>
                         <th>Tanggal Buat</th>
                         <th width="18%">Aksi</th>
                     </tr>
                 </thead>
-                {{-- <tbody>
+                <tbody>
                     @forelse ($pasien as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->kode_pasien }}</td>
-                            <td>{{ $item->poli }}</td>
+                            <td>{{ $item->dokter_id }}</td>
                             <td>{{ $item->nama_pasien }}</td>
+                            <td>{{ $item->nik }}</td>
+                            <td>{{ $item->jenis_kelamin }}</td>
+                            <td>{{ $item->tempat_tanggal_lahir }}</td>
                             <td>{{ $item->nomor_hp }}</td>
+                            <td>{{ $item->alamat }}</td>
+                            <td>{{ $item->nomor_antrian }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>
                                 <a href="/pasien/{{ $item->id }}/edit" class="btn btn-primary">
@@ -52,9 +62,9 @@
                                     <button type="submit" class="btn btn-danger">Hapus</button>
                                 </form>
                             </form>
-                            <a href="{{ route('cetakPasien', $item->id) }}" class="btn btn-primary">
+                            {{-- <a href="{{ route('cetakPasien', $item->id) }}" class="btn btn-primary">
                                 <i class="fas fa-print"></i>
-                            </a>
+                            </a> --}}
                             </td>
                         </tr>
                     @empty
@@ -62,7 +72,7 @@
                             <td colspan="6" class="text-center">Data tidak ada</td>
                         </tr>
                     @endforelse
-                </tbody> --}}
+                </tbody>
             </table>
         </div>
     </div>

@@ -11,7 +11,16 @@ class PasienController extends Controller
      */
     public function index()
     {
-        return view('pasien_index');
+        $cari = request('q');
+        if ($cari) {
+            $data['pasien'] = \App\Models\Pasien::where('nama_pasien', 'like', '%' . $cari . '%')
+                ->orWhere('kode_pasien', 'like', '%' . $cari . '%')
+                ->paginate(10);
+        } else {
+            $data['pasien'] = \App\Models\Pasien::latest()->paginate(10);
+        }
+        $data['judul'] = 'Data-data Pasien';
+        return view('pasien_index', $data);
     }
 
     /**
@@ -19,7 +28,8 @@ class PasienController extends Controller
      */
     public function create()
     {
-        return view('pasien_create');
+        $data['judul'] = 'Tambah Data';
+        return view('pasien_create', $data);
     }
 
     /**
