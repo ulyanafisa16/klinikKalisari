@@ -12,6 +12,6 @@ class Pasien extends Model
 
     public function dokter()
     {
-        return $this->belongsTo(Dokter::class);  // Relasi ke Dokter
+        return $this->belongsTo(Dokter::class, 'dokter_id');  // Relasi ke Dokter
     }
 }

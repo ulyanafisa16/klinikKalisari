@@ -29,7 +29,7 @@
                         <th>Nama</th>
                         <th>Nik</th>
                         <th>Jenis Kelamin</th>
-                        <th>Tempat tanggal lahir</th>
+                        <th>Tanggal lahir</th>
                         <th>Nomor HP</th>
                         <th>Alamat</th>
                         <th>No Antrian</th>
@@ -42,11 +42,11 @@
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->kode_pasien }}</td>
-                            <td>{{ $item->dokter_id }}</td>
+                            <td>{{ $item->dokter->nama_dokter }}</td>
                             <td>{{ $item->nama_pasien }}</td>
                             <td>{{ $item->nik }}</td>
                             <td>{{ $item->jenis_kelamin }}</td>
-                            <td>{{ $item->tempat_tanggal_lahir }}</td>
+                            <td>{{ $item->tanggal_lahir }}</td>
                             <td>{{ $item->nomor_hp }}</td>
                             <td>{{ $item->alamat }}</td>
                             <td>{{ $item->nomor_antrian }}</td>

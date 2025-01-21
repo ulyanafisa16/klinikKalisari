@@ -46,6 +46,24 @@
                     <span class="text-danger">{{ $errors->first('nik') }}</span>
                 </div>
                 <div class="form-group mt-3">
+                    <label for="tanggal_lahir">Tanggal Lahir</label>
+                    <input type="date" name="tanggal_lahir" 
+                           class="form-control" 
+                           value="{{ old('tanggal_lahir') }}" 
+                           required>
+                    <span class="text-danger">{{ $errors->first('tanggal_lahir') }}</span>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="dokter_id">Dokter</label>
+                    <select name="dokter_id" class="form-control" required>
+                        <option value="">Pilih Dokter</option>
+                        @foreach($dokter as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama_dokter }}</option>
+                        @endforeach
+                    </select>
+                    <span class="text-danger">{{ $errors->first('dokter_id') }}</span>
+                </div>
+                <div class="form-group mt-3">
                     <label for="alamat">Alamat</label>
                     <textarea name="alamat" rows="3" class="form-control">{{ old('alamat') }}</textarea>
                     <span class="text-danger">{{ $errors->first('alamat') }}</span>

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('kode_pasien')->unique();
             $table->string('nama_pasien');
             $table->string('nik')->unique();
-            $table->string('tempat_tanggal_lahir');
+            $table->date('tanggal_lahir');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->string('nomor_hp')->nullable();
             $table->foreignId('dokter_id')->constrained('dokters')->onDelete('cascade');
