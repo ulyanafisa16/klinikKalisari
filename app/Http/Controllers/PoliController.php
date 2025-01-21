@@ -11,7 +11,9 @@ class PoliController extends Controller
      */
     public function index()
     {
-        return view('poli_index');
+        $data['poli'] = \App\Models\Poli::latest()->get();
+        $data['judul'] = 'Data-data Poli';
+        return view('poli_index', $data);
     }
 
     /**
@@ -19,7 +21,9 @@ class PoliController extends Controller
      */
     public function create()
     {
-        return view('poli_create');
+        $data['poli'] = new \App\Models\Poli();
+        $data['judul'] = 'Tambah Data';
+        return view('poli_create', $data);
     }
 
     /**
@@ -27,7 +31,16 @@ class PoliController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validasiData = $request->validate([
+            'nama' => 'required|unique:polis',
+            'deskripsi' => 'required'
+        ]);
+        $poli = new \App\Models\Poli();
+        $poli->fill($validasiData);
+        $poli->save();
+
+        flash('Data berhasil disimpan');
+        return back();
     }
 
     /**
@@ -43,7 +56,9 @@ class PoliController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['poli'] = \App\Models\Poli::findOrFail($id);
+        $data['judul'] = 'Ubah Data';
+        return view('poli_edit', $data);
     }
 
     /**
@@ -51,7 +66,16 @@ class PoliController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validasiData = $request->validate([
+            'nama' => 'required|unique:polis,nama,' . $id . ',id',
+            'deskripsi' => 'required'
+        ]);
+        $dokter = \App\Models\Poli::findOrFail($id);
+        $dokter->fill($validasiData);
+        $dokter->save();
+
+        flash('Data berhasil diubah');
+        return redirect('poli');
     }
 
     /**
@@ -59,6 +83,9 @@ class PoliController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $dokter = \App\Models\Poli::findOrFail($id);
+        $dokter->delete();
+        flash('Data berhasil dihapus');
+        return back();
     }
 }
