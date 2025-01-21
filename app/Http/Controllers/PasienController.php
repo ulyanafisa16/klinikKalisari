@@ -106,7 +106,10 @@ class PasienController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['pasien'] = \App\Models\Pasien::findOrFail($id);
+        $data['dokter'] = \App\Models\Dokter::all();
+        $data['judul'] = 'Tambah Data';
+        return view('pasien_edit', $data);
     }
 
     /**
@@ -114,7 +117,21 @@ class PasienController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validasiData = $request->validate([
+            'nama_pasien' => 'required',
+            'jenis_kelamin' => 'required',
+            'tanggal_lahir' => 'required|date',
+            'nomor_hp' => 'required',
+            'dokter_id' => 'required|exists:dokters,id',
+            'alamat' => 'required',
+            'nik' => 'required',
+        ]);
+        $pasien = \App\Models\Pasien::findOrFail($id);
+        $pasien->fill($validasiData);
+        $pasien->save();
+
+        flash('Data berhasil diubah');
+        return redirect('pasien');
     }
 
     /**
