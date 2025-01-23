@@ -8,7 +8,7 @@ class ProfilController extends Controller
 {
     public function index()
     {
-        return view('profil');
+        
     }
 
     /**
@@ -16,7 +16,8 @@ class ProfilController extends Controller
      */
     public function create()
     {
-        //
+        $data['user'] = auth()->user();
+        return view('profil', $data);
     }
 
     /**
@@ -24,7 +25,20 @@ class ProfilController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required|unique:users,email,' . auth()->id(),
+            'password' => 'nullable',
+        ]);
+        $user = \App\Models\User::find(auth()->id());
+        if ($request->password != null) {
+            $user->password = bcrypt($request->password);
+        }
+        $user->name = $request->name;
+        $user->email = $request->username;
+        $user->save();
+        flash('Profil berhasil diubah')->success();
+        return back();
     }
 
     /**

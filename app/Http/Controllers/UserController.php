@@ -11,7 +11,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user_index');
+        $data['user'] = \App\Models\User::latest()->get();
+        $data['judul'] = 'Data-data User';
+        return view('user_index', $data);
     }
 
     /**
@@ -19,7 +21,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user_create');
     }
 
     /**
@@ -27,7 +29,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required',
+        ]);
+        $user = new \App\Models\User();
+        $user->password = bcrypt($request->password);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role = $request->role;
+        $user->save();
+        flash('Data berhasil dibuat')->success();
+        return back();
     }
 
     /**
@@ -43,7 +57,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['user'] = \App\Models\User::findOrFail($id);
+        return view('user_edit', $data);
     }
 
     /**
@@ -51,7 +66,23 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'nullable',
+        ]);
+        $user = \App\Models\User::findOrFail($id);
+
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role = $request->role;
+        $user->save();
+        flash('Data berhasil diupdate')->success();
+        return back();
     }
 
     /**
@@ -59,6 +90,13 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = \App\Models\User::findOrFail($id);
+        if ($user->name == 'admin') {
+            flash('Data user admin tidak bisa dihapus')->error();
+            return back();
+        }
+        $user->delete();
+        flash('Data berhasil dihapus')->success();
+        return back();
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">PROFIL SAYA - {{ strtoupper(auth()->user()->name) }}</div>
-        {{-- <div class="card-body">
+        <div class="card-body">
             <form action="/profil" method="POST" enctype="multipart/form-data">
                 @method('POST')
                 @csrf
@@ -27,6 +27,6 @@
                     <button type="submit" class="btn btn-primary">UPDATE</button>
                 </div>
             </form>
-        </div> --}}
+        </div>
     </div>
 @endsection

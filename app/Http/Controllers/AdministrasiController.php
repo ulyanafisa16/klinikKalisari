@@ -11,7 +11,16 @@ class AdministrasiController extends Controller
      */
     public function index()
     {
-        return view('administrasi_index');
+        if (auth()->user()->role == 'dokter') {
+            //tampilkan administrasi sesuai dokter yang login
+            $data['administrasi'] = \App\Models\Administrasi::where('dokter_id', auth()->user()->dokter->id)
+                ->paginate(50);
+        } else {
+            $data['administrasi'] = \App\Models\Administrasi::orderBy('tanggal', 'desc')->paginate(50);
+        }
+
+        $data['judul'] = 'Data Administrasi';
+        return view('administrasi_index', $data);
     }
 
     /**

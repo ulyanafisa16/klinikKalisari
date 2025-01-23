@@ -122,10 +122,10 @@ class DokterController extends Controller
 
     public function destroy(string $id){
         $dokter = \App\Models\Dokter::findOrFail($id);
-        if ($dokter->administrasi->count() >= 1) {
-            flash('Data tidak bisa dihapus karena sudah digunakan')->error();
-            return back();
-        }
+        // if ($dokter->administrasi->count() >= 1) {
+        //     flash('Data tidak bisa dihapus karena sudah digunakan')->error();
+        //     return back();
+        // }
         $dokter->delete();
         flash('Data berhasil dihapus');
         return back();

@@ -16,7 +16,7 @@
                         <th width="16%">Aksi</th>
                     </tr>
                 </thead>
-                {{-- <tbody>
+                <tbody>
                     @foreach ($user as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
@@ -37,7 +37,7 @@
                             </td>
                         </tr>
                     @endforeach
-                </tbody> --}}
+                </tbody>
             </table>
         </div>
     </div>
