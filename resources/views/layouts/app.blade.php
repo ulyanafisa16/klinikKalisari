@@ -66,7 +66,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item {{ Route::is('profil.*') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="/profil">
+                <a class="nav-link collapsed" href="/profil/create">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Profil</span>
                 </a>
@@ -107,6 +107,11 @@
                         href="/poli">Data Poli</a>
                         <a class="collapse-item {{ Route::is('poli.create') ? 'active' : '' }}" 
                         href="/poli/create">Tambah Poli</a>
+                        <h6 class="collapse-header">Jadwal Dokter:</h6>
+                        <a class="collapse-item {{ Route::is('jadwal.index') ? 'active' : '' }}" 
+                        href="/jadwal">Data Jadwal</a>
+                        <a class="collapse-item {{ Route::is('jadwal.create') ? 'active' : '' }}" 
+                        href="/poli/create">Tambah Jadwal</a>
                     </div>
                 </div>
             </li>
@@ -228,14 +233,16 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-danger badge-counter">
+                                    {{ \App\Models\Administrasi::where('status', 'baru')->count() }}</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
-                                    Alerts Center
+                                    Pendaftaran Baru
                                 </h6>
+                                @forelse (\App\Models\Administrasi::where('status', 'baru')->get() as $item)
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-primary">
@@ -243,10 +250,12 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                        <div class="small text-gray-500">{{ $item->tanggal->format('d F Y') }}</div>
+                                        <span class="font-weight-bold">{{ $item->pasien->nama_pasien }} berobat ke
+                                            {{ $item->poli }}</span>
                                     </div>
                                 </a>
+                                @empty
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-success">
@@ -254,22 +263,11 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
+                                        <span class="font-weight-bold">Data tidak ada</span>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                @endforelse
+                                <a class="dropdown-item text-center small text-gray-500" href="/administrasi">Tampilkan Semua</a>
                             </div>
                         </li>
 

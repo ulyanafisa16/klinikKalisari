@@ -69,7 +69,7 @@ class PasienController extends Controller
             $nomorAntrian = 'A001'; // Default nomor antrian
             if ($lastAntrianHariIni) {
                 $lastNomor = (int) substr($lastAntrianHariIni->nomor_antrian, 1); // Mengambil angka setelah "A"
-                $nomorAntrian = 'A' . sprintf('%03d', $lastNomor + 1);
+                $nomorAntrian = 'A' . sprintf('%03d', $lastNomor + 1). '-' . now()->format('Ymd');
             }
     
             // Menyimpan data pasien

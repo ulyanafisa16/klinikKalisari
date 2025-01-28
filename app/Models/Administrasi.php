@@ -9,6 +9,7 @@ class Administrasi extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $casts = ['tanggal' => 'date:d-m-Y'];
 
     public function pasien()
     {

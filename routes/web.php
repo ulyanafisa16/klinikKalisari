@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\ProfilController;
@@ -27,12 +28,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Rute untuk resource controller yang memerlukan autentikasi
+    Route::resource('home', HomeController::class);
     Route::resource('dokter', DokterController::class);
     Route::resource('pasien', PasienController::class);
     Route::resource('poli', PoliController::class);
     Route::resource('user', UserController::class);
     Route::resource('profil', ProfilController::class);
     Route::resource('administrasi', AdministrasiController::class);
+    Route::resource('jadwal', JadwalController::class);
 });
 
 

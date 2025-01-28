@@ -2,41 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class ProfilController extends Controller
-{
-    public function index()
+class JadwalController extends Controller
+{public function index()
     {
+        return view('jadwal_index');
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-{
-    $data['user'] = Auth::user();
-    return view('profil', $data);
-}
-
-public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required',
-        'username' => 'required|unique:users,email,' . Auth::id(),
-        'password' => 'nullable',
-    ]);
-    $user = \App\Models\User::find(Auth::id());
-    if ($request->password != null) {
-        $user->password = bcrypt($request->password);
+    {
+        //
     }
-    $user->name = $request->name;
-    $user->email = $request->username;
-    $user->save();
-    flash('Profil berhasil diubah')->success();
-    return back();
-}
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
     /**
      * Display the specified resource.
      */
@@ -69,3 +58,5 @@ public function store(Request $request)
         //
     }
 }
+
+

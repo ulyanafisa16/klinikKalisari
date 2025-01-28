@@ -14,9 +14,9 @@
             Administrasi
         </div>
         <div class="card-body">
-            {{-- @if (auth()->user()->role != 'dokter')
+            @if (auth()->user()->role != 'dokter')
                 <a href="{{ route('administrasi.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
-            @endif --}}
+            @endif
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -29,7 +29,7 @@
                             <th width="20%">Aksi</th>
                         </tr>
                     </thead>
-                    {{-- <tbody>
+                    <tbody>
                         @foreach ($administrasi as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
@@ -38,8 +38,8 @@
                                         <dt class="col-md-4">Nama Pasien</dt>
                                         <dd class="col-md-8">: {{ $item->pasien->nama_pasien }}</dd>
 
-                                        <dt class="col-md-4">NIK</dt>
-                                        <dd class="col-md-8">: {{ $item->pasien->nik}}</dd>
+                                        {{-- <dt class="col-md-4">NIK</dt>
+                                        <dd class="col-md-8">: {{ $item->pasien->nik}}</dd> --}}
 
                                         <dt class="col-md-4">Nomor HP</dt>
                                         <dd class="col-md-8">: {{ $item->pasien->nomor_hp }}</dd>
@@ -60,8 +60,8 @@
                                     </div>
                                 </td>
                                 {{-- <td>Rp. {{ number_format($item->biaya, 0, ',', '.') }}</td> --}}
-                                {{-- <td>
-                                    <span
+                                <td>
+                                     <span
                                         class="badge badge-pill badge-{{ $item->status == 'baru' ? 'primary' : 'success' }}"
                                         style="font-size: 100% !important;">{{ $item->status }}</span>
                                 </td>
@@ -81,9 +81,9 @@
                                 </td>
                             </tr>
                         @endforeach
-                    </tbody> --}}
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
-@endsection
+@endsection 
