@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('jadwal_dokters', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_jadwal'); // Kode Jadwal
+            $table->unsignedBigInteger('dokter_id'); // Integer untuk referensi dokter
+            $table->unsignedBigInteger('poli_id');   // Integer untuk referensi poli
+            $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']);
+            $table->time('jam_mulai'); // Jam Mulai
+            $table->time('jam_selesai'); // Jam Selesai
             $table->timestamps();
         });
     }

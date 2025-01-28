@@ -22,4 +22,9 @@ class Dokter extends Model
         return $this->hasMany(Administrasi::class);
     }
 
+    public function jadwalDokters()
+    {
+        return $this->hasMany(JadwalDokter::class);
+    }
+
 }

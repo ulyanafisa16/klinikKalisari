@@ -9,4 +9,9 @@ class Poli extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function jadwalDokters()
+    {
+        return $this->hasMany(JadwalDokter::class);
+    }
 }
