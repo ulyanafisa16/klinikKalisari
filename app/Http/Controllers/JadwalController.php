@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JadwalDokter;
 use Illuminate\Http\Request;
 
 class JadwalController extends Controller
@@ -51,7 +52,7 @@ class JadwalController extends Controller
         $jadwal->jam_mulai = $request->jam_mulai; // Jam mulai
         $jadwal->jam_selesai = $request->jam_selesai; // Jam selesai
         $jadwal->save(); 
-        
+
         flash('Data sudah disimpan')->success();
         return back();
 
@@ -70,7 +71,10 @@ class JadwalController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['jadwal'] = \App\Models\JadwalDokter::findOrFail($id); // Ini sudah benar
+        $data['polis'] = \App\Models\Poli::all();  // Ganti pluck dengan all atau get untuk mendapatkan koleksi objek
+        $data['dokters'] = \App\Models\Dokter::all();  // Sama seperti poli, gunakan all atau get
+        return view('jadwal_edit', $data);        
     }
 
     /**
@@ -78,7 +82,31 @@ class JadwalController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'dokter_id' => 'required',
+            'poli_id' => 'required',
+            'hari' => 'required',
+            'jam_mulai' => 'required',
+            'jam_selesai' => 'required',
+        ]);
+
+        // Temukan jadwal berdasarkan ID
+        $jadwal = JadwalDokter::findOrFail($id);
+
+        // Update data jadwal dengan data dari form
+        $jadwal->dokter_id = $request->dokter_id;
+        $jadwal->poli_id = $request->poli_id;
+        $jadwal->hari = $request->hari;
+        $jadwal->jam_mulai = $request->jam_mulai;
+        $jadwal->jam_selesai = $request->jam_selesai;
+
+        // Simpan perubahan
+        $jadwal->save();
+        flash('Jadwal Dokter berhasil diperbarui')->success();
+
+        // Redirect kembali ke halaman jadwal
+        return redirect('/jadwal');
+
     }
 
     /**
@@ -86,7 +114,10 @@ class JadwalController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $jadwal = \App\Models\JadwalDokter::findOrfail($id);
+        $jadwal->delete();
+        flash('Data sudah dihapus')->success();
+        return back();
     }
 }
 
