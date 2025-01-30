@@ -55,7 +55,7 @@
                 </div>
                 <div class="form-group mt-3">
                     <label for="poli_id">Poli</label>
-                    <select name="poli_id" class="form-control" required onchange="getDokterByPoli(this.value)">
+                    <select name="poli_id" class="form-control" required >
                         <option value="">Pilih Poli</option>
                         @foreach($poli as $item)
                             <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const dokterSelect = document.querySelector('select[name="dokter_id"]');
     const jadwalSelect = document.querySelector('select[name="jadwal_id"]');
 
-    // Reset dependent dropdowns
+    // Reset dropdown yang tergantung
     function resetDokter() {
         dokterSelect.innerHTML = '<option value="">Pilih Dokter</option>';
         resetJadwal();
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
         jadwalSelect.innerHTML = '<option value="">Pilih Jadwal</option>';
     }
 
-    // Handle Poli selection
+    // Menangani pemilihan Poli
     poliSelect.addEventListener('change', function() {
         const poliId = this.value;
         resetDokter();
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error:', error));
     });
 
-    // Handle Dokter selection
+    // Menangani pemilihan Dokter
     dokterSelect.addEventListener('change', function() {
         const dokterId = this.value;
         resetJadwal();
@@ -161,12 +161,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 data.jadwals.forEach(jadwal => {
                     const option = document.createElement('option');
                     option.value = jadwal.id;
-                    // Format the date nicely
-                    const tanggal = new Date(jadwal.tanggal).toLocaleDateString('id-ID', {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
+                    // Format tanggal dengan baik
+                    option.textContent = `${jadwal.hari} - ${jadwal.jam_mulai} s/d ${jadwal.jam_selesai}`;
+                jadwalSelect.appendChild(option);
                     });
                     option.textContent = `${tanggal} - ${jadwal.jam_mulai} s/d ${jadwal.jam_selesai}`;
                     jadwalSelect.appendChild(option);
@@ -175,8 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error:', error));
     });
 
-    // Reset dependent fields on page load
+    // Reset field yang tergantung pada saat halaman dimuat
     resetDokter();
-});
 </script>
 @endsection

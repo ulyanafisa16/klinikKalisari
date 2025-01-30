@@ -385,6 +385,7 @@
                 <div class="container-fluid">
                     @include('flash::message')
                     @yield('content')
+                    @yield('scripts') 
 
                 </div>
                 {{-- <div class="container-fluid">

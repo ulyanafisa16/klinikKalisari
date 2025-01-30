@@ -100,7 +100,7 @@ class PasienController extends Controller
         }
     }
     public function getDokterByPoli($poliId)
-{
+    {
     $dokters = Dokter::where('poli_id', $poliId)->get();
 
     if ($dokters->isEmpty()) {
@@ -108,14 +108,13 @@ class PasienController extends Controller
     }
 
     return response()->json(['dokters' => $dokters]);
-}
+    }
 
-public function getJadwalByDokter($dokter_id)
-{
+    public function getJadwalByDokter($dokter_id)
+    {
     $jadwals = JadwalDokter::where('dokter_id', $dokter_id)
-        ->where('tanggal', '>=', date('Y-m-d'))
-        ->orderBy('tanggal')
-        ->orderBy('jam_mulai')
+    ->orderByRaw("FIELD(hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu')") // Urutkan berdasarkan hari
+    ->orderBy('jam_mulai', 'asc')
         ->get();
 
     if ($jadwals->isEmpty()) {
@@ -123,7 +122,7 @@ public function getJadwalByDokter($dokter_id)
     }
 
     return response()->json(['jadwals' => $jadwals]);
-}
+    }
 
 
 

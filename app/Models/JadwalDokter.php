@@ -9,6 +9,7 @@ class JadwalDokter extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $table = 'jadwal_dokters'; 
 
     public function poli()
     {
