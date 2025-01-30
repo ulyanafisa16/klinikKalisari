@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Poli extends Model
 {
@@ -14,4 +15,14 @@ class Poli extends Model
     {
         return $this->hasMany(JadwalDokter::class);
     }
+
+    public function pasiens(): HasMany
+    {
+        return $this->hasMany(Pasien::class, 'dokter_id'); // Menambahkan relasi ke pasien
+    }
+    public function dokters()
+    {
+    return $this->hasMany(Dokter::class);
+    }
+
 }

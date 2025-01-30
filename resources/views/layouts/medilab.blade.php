@@ -374,7 +374,7 @@
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title --> --}}
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="container section-title" data-aos="fade-up">
 
         <div class="section-title">
           <h2>REGISTRASI PASIEN</h2>
@@ -382,9 +382,8 @@
               sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
               ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
       </div>
-      @include('flash::message')
-      <div class="main-content">
-          @yield('content')
+        @include('flash::message')
+        @yield('content')
 
       </div>
 

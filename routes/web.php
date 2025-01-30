@@ -8,12 +8,12 @@ use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegistrasiPasienController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [RegistrasiPasienController::class, 'create']);
+Route::resource('registrasipasien', RegistrasiPasienController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

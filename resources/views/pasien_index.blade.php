@@ -26,7 +26,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Kode</th>
-                            {{-- <th>Dokter</th> --}}
+                            <th>Dokter</th>
                             <th>Nama</th>
                             <th>Nik</th>
                             <th>Jenis Kelamin</th>
@@ -43,7 +43,7 @@
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->kode_pasien }}</td>
-                                {{-- <td>{{ $item->dokter->nama_dokter }}</td> --}}
+                                <td>{{ $item->dokter->nama_dokter }}</td>
                                 <td>{{ $item->nama_pasien }}</td>
                                 <td>{{ $item->nik }}</td>
                                 <td>{{ $item->jenis_kelamin }}</td>

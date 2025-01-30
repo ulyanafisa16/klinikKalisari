@@ -20,4 +20,9 @@ class JadwalDokter extends Model
     {
         return $this->belongsTo(Dokter::class); // Anggap ada model Dokter
     }
+
+    public function pasien()
+    {
+    return $this->belongsTo(Pasien::class);
+    }
 }

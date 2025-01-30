@@ -19,4 +19,15 @@ class Pasien extends Model
     {
         return $this->hasMany(Administrasi::class);
     }
+
+    public function poli()
+    {
+    return $this->belongsTo(Poli::class, 'poli_id');
+    }
+
+    public function jadwalDokters()
+    {
+    return $this->hasMany(JadwalDokter::class);
+    }
+
 }
