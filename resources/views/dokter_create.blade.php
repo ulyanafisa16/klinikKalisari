@@ -23,13 +23,14 @@
                     <span class="text-danger">{{ $errors->first('foto') }}</span>
                 </div>
                 <div class="form-group mt-3">
-                    <label for="Dokter">Dokter</label>
-                    <select name="spesialis" class="form-control">
-                        <option value="Umum" @selected(old('spesialis') == 'Umum')> Dokter umum</option>
-                        <option value="Gigi" @selected(old('spesialis') == 'Gigi')> Dokter Gigi</option>
-                        <option value="paru" @selected(old('spesialis') == 'paru')> Spesialis Paru</option>
+                    <label for="poli_id">Poli Dokter</label>
+                    <select name="poli_id" class="form-control">
+                        <option value="">-- Pilih Poli --</option>
+                        @foreach ($list_poli as $poli)
+                            <option value="{{ $poli->id }}">{{ $poli->nama }}</option>
+                        @endforeach
                     </select>
-                    <span class="text-danger">{{ $errors->first('spesialis') }}</span>
+                    <span class="text-danger">{{ $errors->first('poli_id') }}</span>
                 </div>
                 <div class="form-group mt-3">
                     <label for="nomor_hp">Nomor HP</label>

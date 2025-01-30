@@ -32,9 +32,9 @@ class Dokter extends Model
         return $this->hasMany(Pasien::class, 'dokter_id'); // Menambahkan relasi ke pasien
     }
 
-    public function poli()
+    public function poli(): BelongsTo
     {
-        return $this->belongsTo(Poli::class);
+        return $this->belongsTo(Poli::class, 'poli_id'); // Menentukan foreign key (poli_id)
     }
 
 }

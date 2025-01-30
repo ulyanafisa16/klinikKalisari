@@ -28,13 +28,15 @@
                     <img src="{{ Storage::url($dokter->foto) }}" width="100px" height="100px" alt="foto dokter">
                 @endif
                 <div class="form-group mt-3">
-                    <label for="spesialis">Spesialis</label>
-                    <select name="spesialis" class="form-control">
-                        <option value="umum" @selected($dokter->spesialis == 'umum')>Dokter Umum</option>
-                        <option value="gigi" @selected($dokter->spesialis == 'gigi')>Dokter Gigi</option>
-                        <option value="paru" @selected($dokter->spesialis == 'paru')> Spesialis Paru </option>
+                    <label for="poli_id">Poli</label>
+                    <select name="poli_id" class="form-control">
+                        @foreach ($list_poli as $poli)
+                            <option value="{{ $poli->id }}" @selected($dokter->poli_id == $poli->id)>
+                                {{ $poli->nama }}
+                            </option>
+                        @endforeach
                     </select>
-                    <span class="text-danger">{{ $errors->first('spesialis') }}</span>
+                    <span class="text-danger">{{ $errors->first('poli_id') }}</span>
                 </div>
                 <div class="form-group mt-3">
                     <label for="nomor_hp">Nomor HP</label>
