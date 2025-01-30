@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Dokter;
+use App\Models\JadwalDokter;
 
 class PasienController extends Controller
 {
@@ -30,7 +32,9 @@ class PasienController extends Controller
     public function create()
     {
         $data['judul'] = 'Tambah Data';
-        $data['dokter'] = \App\Models\Dokter::all();
+        $data['poli'] = \App\Models\Poli::all(); // Ambil semua poli
+        $data['dokter'] = collect();
+        $data['jadwals'] = collect();
         return view('pasien_create', $data);
     }
 
@@ -47,7 +51,11 @@ class PasienController extends Controller
             'nomor_hp' => 'required',
             'dokter_id' => 'required|exists:dokters,id',
             'alamat' => 'required',
-            'nik' => 'required|digits:16|unique:pasiens,nik', // Validasi unik untuk NIK
+            'nik' => 'required|digits:16|unique:pasiens,nik', 
+            'poli_id' => 'required|exists:polis,id', // Validasi poli
+            'jadwal_id' => 'required|exists:jadwals,id', // Validasi jadwal
+            'jam_kunjungan' => 'required|date_format:H:i',
+            'tipe_pemeriksaan' => 'required|in:klinik,home_care',// Validasi unik untuk NIK
         ]);
     
         DB::beginTransaction();
@@ -91,7 +99,33 @@ class PasienController extends Controller
             return back()->withInput();
         }
     }
-    
+    public function getDokterByPoli($poliId)
+{
+    $dokters = Dokter::where('poli_id', $poliId)->get();
+
+    if ($dokters->isEmpty()) {
+        return response()->json(['message' => 'Tidak ada dokter untuk poli ini'], 404);
+    }
+
+    return response()->json(['dokters' => $dokters]);
+}
+
+public function getJadwalByDokter($dokter_id)
+{
+    $jadwals = JadwalDokter::where('dokter_id', $dokter_id)
+        ->where('tanggal', '>=', date('Y-m-d'))
+        ->orderBy('tanggal')
+        ->orderBy('jam_mulai')
+        ->get();
+
+    if ($jadwals->isEmpty()) {
+        return response()->json(['message' => 'Tidak ada jadwal untuk dokter ini'], 404);
+    }
+
+    return response()->json(['jadwals' => $jadwals]);
+}
+
+
 
     /**
      * Display the specified resource.

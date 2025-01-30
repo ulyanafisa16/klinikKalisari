@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Dokter;
 use App\Models\User;
-use App\Models\Poli;
+
 
 class DokterController extends Controller
 {

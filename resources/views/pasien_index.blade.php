@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            {{-- {{ $judul }} --}}
+            {{ $judul }}
         </div>
         <div class="card-body">
             <a href="/pasien/create" class="btn btn-primary mb-2">Tambah Pasien</a>
@@ -43,7 +43,7 @@
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->kode_pasien }}</td>
-                                <td>{{ $item->dokter->nama_dokter }}</td>
+                                <td>{{ $item->dokter->nama_dokter ?? 'Tidak ada dokter' }}</td>
                                 <td>{{ $item->nama_pasien }}</td>
                                 <td>{{ $item->nik }}</td>
                                 <td>{{ $item->jenis_kelamin }}</td>

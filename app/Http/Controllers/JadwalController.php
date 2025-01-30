@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class JadwalController extends Controller
 {public function index()
     {
-        $data['jadwal_dokter'] = \App\Models\JadwalDokter::latest()->get();
+        $data['jadwal'] = \App\Models\JadwalDokter::latest()->get();
         $data['judul'] = 'Jadwal Dokter';
         return view('jadwal_index', $data);
     }

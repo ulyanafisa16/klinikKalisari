@@ -22,12 +22,12 @@
                         </tr>
                     </thead>
                      <tbody>
-                        @forelse ($jadwal_dokter as $item)
+                        @forelse ($jadwal as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->kode_jadwal }}</td>
                                 <td>{{ $item->poli->nama }}</td>
-                                <td>{{ $item->dokter->nama_dokter }}</td>
+                                <td>{{ $item->dokter->nama_dokter ?? 'Tidak ada dokter' }}</td>
                                 <td>{{ $item->hari }}</td>
                                 <td>{{ $item->jam_mulai }}</td>
                                 <td>{{ $item->jam_selesai }}</td>

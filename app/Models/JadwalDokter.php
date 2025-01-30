@@ -18,7 +18,7 @@ class JadwalDokter extends Model
     // Relasi ke model Dokter
     public function dokter()
     {
-        return $this->belongsTo(Dokter::class); // Anggap ada model Dokter
+        return $this->belongsTo(Dokter::class, 'dokter_id'); // Anggap ada model Dokter
     }
 
     public function pasien()

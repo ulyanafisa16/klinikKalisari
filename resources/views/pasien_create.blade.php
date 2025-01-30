@@ -54,14 +54,49 @@
                     <span class="text-danger">{{ $errors->first('tanggal_lahir') }}</span>
                 </div>
                 <div class="form-group mt-3">
+                    <label for="poli_id">Poli</label>
+                    <select name="poli_id" class="form-control" required onchange="getDokterByPoli(this.value)">
+                        <option value="">Pilih Poli</option>
+                        @foreach($poli as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                        @endforeach
+                    </select>
+                    <span class="text-danger">{{ $errors->first('poli_id') }}</span>
+                </div>
+                <div class="form-group mt-3">
                     <label for="dokter_id">Dokter</label>
                     <select name="dokter_id" class="form-control" required>
                         <option value="">Pilih Dokter</option>
-                        @foreach($dokter as $item)
+                        {{-- @foreach($dokter as $item)
                             <option value="{{ $item->id }}">{{ $item->nama_dokter }}</option>
-                        @endforeach
+                        @endforeach --}}
                     </select>
                     <span class="text-danger">{{ $errors->first('dokter_id') }}</span>
+                </div>
+                
+                <div class="form-group mt-3">
+                    <label for="jadwal_id">Jadwal</label>
+                    <select name="jadwal_id" class="form-control" required>
+                        <option value="">Pilih Jadwal</option>
+                        {{-- @foreach($jadwals as $item)
+                            <option value="{{ $item->id }}">{{ $item->tanggal }} - {{ $item->jam_mulai }} s/d {{ $item->jam_selesai }}</option>
+                        @endforeach --}}
+                    </select>
+                    <span class="text-danger">{{ $errors->first('jadwal_id') }}</span>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="jam_kunjungan">Jam Kunjungan</label>
+                    <input type="time" name="jam_kunjungan" class="form-control" value="{{ old('jam_kunjungan') }}" />
+                    <span class="text-danger">{{ $errors->first('jam_kunjungan') }}</span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="tipe_pemeriksaan">Tipe Pemeriksaan</label>
+                    <select name="tipe_pemeriksaan" class="form-control" required>
+                        <option value="Klinik" {{ old('tipe_pemeriksaan') == 'Klinik' ? 'selected' : '' }}>Klinik</option>
+                        <option value="Homecare" {{ old('tipe_pemeriksaan') == 'Homecare' ? 'selected' : '' }}>Homecare</option>
+                    </select>
+                    <span class="text-danger">{{ $errors->first('tipe_pemeriksaan') }}</span>
                 </div>
                 <div class="form-group mt-3">
                     <label for="alamat">Alamat</label>
@@ -74,4 +109,74 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const poliSelect = document.querySelector('select[name="poli_id"]');
+    const dokterSelect = document.querySelector('select[name="dokter_id"]');
+    const jadwalSelect = document.querySelector('select[name="jadwal_id"]');
+
+    // Reset dependent dropdowns
+    function resetDokter() {
+        dokterSelect.innerHTML = '<option value="">Pilih Dokter</option>';
+        resetJadwal();
+    }
+
+    function resetJadwal() {
+        jadwalSelect.innerHTML = '<option value="">Pilih Jadwal</option>';
+    }
+
+    // Handle Poli selection
+    poliSelect.addEventListener('change', function() {
+        const poliId = this.value;
+        resetDokter();
+
+        if (!poliId) return;
+
+        fetch(`/getDokterByPoli/${poliId}`)
+            .then(response => response.json())
+            .then(data => {
+                data.dokters.forEach(dokter => {
+                    const option = document.createElement('option');
+                    option.value = dokter.id;
+                    option.textContent = dokter.nama_dokter;
+                    dokterSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    // Handle Dokter selection
+    dokterSelect.addEventListener('change', function() {
+        const dokterId = this.value;
+        resetJadwal();
+
+        if (!dokterId) return;
+
+        fetch(`/getJadwalByDokter/${dokterId}`)
+            .then(response => response.json())
+            .then(data => {
+                data.jadwals.forEach(jadwal => {
+                    const option = document.createElement('option');
+                    option.value = jadwal.id;
+                    // Format the date nicely
+                    const tanggal = new Date(jadwal.tanggal).toLocaleDateString('id-ID', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    option.textContent = `${tanggal} - ${jadwal.jam_mulai} s/d ${jadwal.jam_selesai}`;
+                    jadwalSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    // Reset dependent fields on page load
+    resetDokter();
+});
+</script>
 @endsection
