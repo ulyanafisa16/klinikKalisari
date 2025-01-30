@@ -53,9 +53,9 @@ class PasienController extends Controller
             'alamat' => 'required',
             'nik' => 'required|digits:16|unique:pasiens,nik', 
             'poli_id' => 'required|exists:polis,id', // Validasi poli
-            'jadwal_id' => 'required|exists:jadwals,id', // Validasi jadwal
+            'jadwal_id' => 'required|exists:jadwal_dokters,id', // Validasi jadwal
             'jam_kunjungan' => 'required|date_format:H:i',
-            'tipe_pemeriksaan' => 'required|in:klinik,home_care',// Validasi unik untuk NIK
+            'tipe_pemeriksaan' => 'required|in:Klinik,Homecare',// Validasi unik untuk NIK
         ]);
     
         DB::beginTransaction();
