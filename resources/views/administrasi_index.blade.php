@@ -24,7 +24,7 @@
                             <th>ID</th>
                             <th width="38%">Data Pasien</th>
                             <th>Keluhan</th>
-                            {{-- <th>Biaya</th> --}}
+                            <th>Biaya</th>
                             <th>Status</th>
                             <th width="20%">Aksi</th>
                         </tr>
@@ -59,7 +59,7 @@
                                         {{ $item->diagnosis }}
                                     </div>
                                 </td>
-                                {{-- <td>Rp. {{ number_format($item->biaya, 0, ',', '.') }}</td> --}}
+                                <td>Rp. {{ number_format($item->biaya, 0, ',', '.') }}</td>
                                 <td>
                                      <span
                                         class="badge badge-pill badge-{{ $item->status == 'baru' ? 'primary' : 'success' }}"

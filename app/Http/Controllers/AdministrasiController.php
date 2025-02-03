@@ -100,7 +100,10 @@ class AdministrasiController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['administrasi'] = \App\Models\Administrasi::findOrfail($id);
+        $data['list_pasien'] = \App\Models\Pasien::pluck('nama_pasien', 'id');
+        $data['list_dokter'] = \App\Models\Dokter::pluck('nama_dokter', 'id');
+        return view('administrasi_edit', $data);
     }
 
     /**
@@ -108,7 +111,17 @@ class AdministrasiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validasiData = $request->validate([
+            'diagnosis' => 'required',
+            'biaya'     => 'required|numeric|min:0',
+        ]);
+        $administrasi = \App\Models\Administrasi::findOrfail($id);
+        $administrasi->diagnosis = strip_tags($request->diagnosis);
+        $administrasi->biaya = $request->biaya;
+        $administrasi->status = 'selesai';
+        $administrasi->save();
+        flash('Data sudah disimpan')->success();
+        return redirect('/administrasi');
     }
 
     /**
@@ -116,6 +129,9 @@ class AdministrasiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $administrasi = \App\Models\Administrasi::findOrfail($id);
+        $administrasi->delete();
+        flash('Data sudah dihapus')->success();
+        return back();
     }
 }
