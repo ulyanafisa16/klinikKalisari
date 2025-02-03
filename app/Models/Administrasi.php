@@ -24,4 +24,11 @@ class Administrasi extends Model
             'nama_dokter' => 'Data sudah dihapus',
         ]);
     }
+
+    public function poli()
+    {
+        return $this->belongsTo(Poli::class)->withDefault([
+            'nama' => 'Data sudah dihapus',
+        ]);
+    }
 }

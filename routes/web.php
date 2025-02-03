@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('jadwal', JadwalController::class);
     Route::get('/getDokterByPoli/{poliId}', [PasienController::class, 'getDokterByPoli']);
     Route::get('/getJadwalByDokter/{dokterId}', [PasienController::class, 'getJadwalByDokter']);
+    Route::get('/get-poli-by-pasien/{id}', [AdministrasiController::class, 'getPoliByPasien']);
 
 });
 

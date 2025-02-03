@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Pasien;
 
 class AdministrasiController extends Controller
 {
@@ -29,7 +30,7 @@ class AdministrasiController extends Controller
     public function create()
     {
         $data['list_pasien'] = \App\Models\Pasien::get();
-        $data['list_poli'] = \App\Models\Poli::get();
+        $data['list_poli'] = collect(); 
         return view('administrasi_create', $data);
     }
 
@@ -63,17 +64,32 @@ class AdministrasiController extends Controller
         }
         $adm = new \App\Models\Administrasi();
         $adm->kode_administrasi = $kode;
-        $adm->poli = $poli->nama;
+        $adm->poli_id = $request->poli_id;
         $adm->pasien_id = $request->pasien_id;
         $adm->tanggal = $request->tanggal;
         $adm->keluhan = strip_tags($request->keluhan);
-        $adm->dokter_id = $poli->dokter_id;
+        $adm->dokter_id = $request->dokter_id;
         $adm->biaya = $poli->biaya;
         $adm->save();
         flash('Data sudah disimpan')->success();
         return back();
     }
 
+    public function getPoliByPasien($id)
+    {
+        $pasien = \App\Models\Pasien::with(['poli', 'dokter'])->find($id);
+    return response()->json([
+        'poli' => [
+            'id' => $pasien->poli->id,
+            'nama' => $pasien->poli->nama
+        ],
+        'dokter' => [
+            'id' => $pasien->dokter->id ?? null,
+            'nama' => $pasien->dokter->nama ?? null
+        ]
+    ]);
+    }
+    
     /**
      * Display the specified resource.
      */

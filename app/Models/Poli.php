@@ -25,4 +25,9 @@ class Poli extends Model
         return $this->hasMany(Dokter::class, 'poli_id'); // Relasi antara Poli dan Dokter
     }
 
+    public function administrasi(): HasMany
+    {
+        return $this->hasMany(Administrasi::class);
+    }
+
 }

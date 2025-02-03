@@ -34,11 +34,11 @@
                     <div class="col-md-6 form-group">
                         <label for="poli_id">Pilih Poli Tujuan</label>
                         <select name="poli_id" id="poli_id" class="form-control">
-                            @foreach ($list_poli as $item)
+                            {{-- @foreach ($list_poli as $item)
                                 <option value="{{ $item->id }}" @selected(old('poli_id') == $item->id)>
-                                     {{ $item->nama }} 
+                                     {{ $item->nama }} -
                                 </option>
-                            @endforeach
+                            @endforeach --}}
                         </select>
                         <span class="text-danger">{{ $errors->first('poli_id') }}</span>
                     </div>
@@ -50,4 +50,39 @@
                 <button type="submit" class="btn btn-primary">SIMPAN</button>
         </div>
     </div>
+@endsection
+    @section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+         $(document).ready(function() {
+        $('#pasien_id').change(function() {
+            var pasienId = $(this).val();
+            if (pasienId) {
+                $.ajax({
+                    url: '/get-poli-by-pasien/' + pasienId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        // Clear current options
+                        $('#poli_id').empty();
+                        
+                        // Add the poli from the patient
+                        if(response.poli) {
+                            $('#poli_id').append(
+                                $('<option>', {
+                                    value: response.poli.id,
+                                    text: response.poli.nama,
+                                    selected: true
+                                })
+                            );
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
+        });
+    });
+        </script>
 @endsection
