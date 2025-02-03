@@ -30,7 +30,7 @@ class AdministrasiController extends Controller
     public function create()
     {
         $data['list_pasien'] = \App\Models\Pasien::get();
-        $data['list_poli'] = collect(); 
+        $data['dokter'] = collect(); 
         return view('administrasi_create', $data);
     }
 
@@ -41,7 +41,7 @@ class AdministrasiController extends Controller
     {
         $validasiData = $request->validate([
             'pasien_id' => 'required',
-            'poli_id' => 'required',
+            'dokter_id' => 'required',
             'tanggal' => 'required',
             'keluhan' => 'required',
             // 'nik'     => 'required',
@@ -56,7 +56,7 @@ class AdministrasiController extends Controller
     //     $pasien->save();
     //     }
 
-        $poli = \App\Models\Poli::findOrfail($request->poli_id);
+        $dokter = \App\Models\Dokter::findOrfail($request->dokter_id);
         $kodeAdm = \App\Models\Administrasi::orderBy('id', 'desc')->first();
         $kode = 'ADM0001';
         if ($kodeAdm) {
@@ -69,7 +69,7 @@ class AdministrasiController extends Controller
         $adm->tanggal = $request->tanggal;
         $adm->keluhan = strip_tags($request->keluhan);
         $adm->dokter_id = $request->dokter_id;
-        $adm->biaya = $poli->biaya;
+        $adm->biaya = null;
         $adm->save();
         flash('Data sudah disimpan')->success();
         return back();
@@ -77,17 +77,14 @@ class AdministrasiController extends Controller
 
     public function getPoliByPasien($id)
     {
-        $pasien = \App\Models\Pasien::with(['poli', 'dokter'])->find($id);
-    return response()->json([
-        'poli' => [
-            'id' => $pasien->poli->id,
-            'nama' => $pasien->poli->nama
-        ],
-        'dokter' => [
-            'id' => $pasien->dokter->id ?? null,
-            'nama' => $pasien->dokter->nama ?? null
-        ]
-    ]);
+        $patient = \App\Models\Pasien::with('dokter')->find($id);
+
+        return response()->json([
+            'doctor' => [
+                'id' => $patient->dokter->id,
+                'nama_dokter' => $patient->dokter->nama_dokter
+            ]
+        ]);
     }
     
     /**
