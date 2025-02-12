@@ -24,7 +24,8 @@ class RegistrasiPasienController extends Controller
         ];
         $data['dokter'] = \App\Models\Dokter::all();
         $data['poli'] = \App\Models\Poli::all();
-        return view('registrasipasien_create');
+        $data['jadwal'] = \App\Models\JadwalDokter::all();
+        return view('registrasipasien_create', $data);
     }
 
     /**
@@ -36,49 +37,66 @@ class RegistrasiPasienController extends Controller
         $validasiData = $request->validate([
             'nama_pasien' => 'required',
             'jenis_kelamin' => 'required',
-            'status' => 'required',
+            'tanggal_lahir' => 'required|date',
+            'nomor_hp' => 'required',
+            'dokter_id' => 'required|exists:dokters,id',
             'alamat' => 'required',
-            'keluhan' => 'required',
-            'tanggal' => 'required',
-            'poli_id' => 'required|exists:polis,id',
+            'nik' => 'required|digits:16|unique:pasiens,nik', 
+            'poli_id' => 'required|exists:polis,id', // Validasi poli
+            'jadwal_id' => 'required|exists:jadwal_dokters,id', // Validasi jadwal
+            'jam_kunjungan' => 'required|date_format:H:i',
+            'tipe_pemeriksaan' => 'required|in:Klinik,Homecare',
         ]);
-        DB::beginTransaction();
-        //cek kode pasien terakhir
-        $kodeQuery = \App\Models\Pasien::orderBy('id', 'desc')->first();
-        $kode = 'P0001';
-        if ($kodeQuery) {
-            $kode = 'P' . sprintf('%04d', $kodeQuery->id + 1);
+        try {
+            DB::beginTransaction();
+        
+            // Proses penyimpanan data pasien
+            $kodeQuery = \App\Models\Pasien::orderBy('id', 'desc')->first();
+            $kode = 'P0001';
+            if ($kodeQuery) {
+                $kode = 'P' . sprintf('%04d', $kodeQuery->id + 1);
+            }
+        
+            $pasien = new \App\Models\Pasien();
+            $pasien->kode_pasien = $kode;
+            $pasien->nama_pasien = $request->nama_pasien;
+            $pasien->jenis_kelamin = $request->jenis_kelamin;
+            $pasien->status = $request->status ?? 'Aktif';
+            $pasien->alamat = $request->alamat;
+            $pasien->tipe_pemeriksaan = $request->tipe_pemeriksaan;
+            $pasien->jam_kunjungan = $request->jam_kunjungan;
+            $pasien->jadwal_id = $request->jadwal_id;
+            $pasien->nik = $request->nik;
+            $pasien->poli_id = $request->poli_id;
+            $pasien->dokter_id = $request->dokter_id;
+            $pasien->nomor_hp = $request->nomor_hp;
+            $pasien->save();
+        
+            // Proses penyimpanan administrasi
+            $kodeAdm = \App\Models\Administrasi::orderBy('id', 'desc')->first();
+            $kode = 'ADM0001';
+            if ($kodeAdm) {
+                $kode = 'ADM' . sprintf('%04d', $kodeAdm->id + 1);
+            }
+        
+            $adm = new \App\Models\Administrasi();
+            $adm->kode_administrasi = $kode;
+            $adm->pasien_id = $pasien->id;
+            $adm->tanggal = $request->tanggal ?? now(); // Pastikan tanggal ada
+            $adm->keluhan = strip_tags($request->keluhan);
+            $adm->dokter_id = $request->dokter_id;
+            $adm->save();
+        
+            DB::commit();
+            dd('Data berhasil disimpan'); // Jika ini muncul, berarti data sukses masuk
+        
+        } catch (\Exception $e) {
+            DB::rollBack();
+            dd('Error: ' . $e->getMessage()); // Munculkan error jika ada masalah
+        
+            
         }
-        //simpan pasien
-        $pasien = new \App\Models\Pasien();
-        $pasien->kode_pasien = $kode;
-        $pasien->nama_pasien = $request->nama_pasien;
-        $pasien->jenis_kelamin = $request->jenis_kelamin;
-        $pasien->status = $request->status;
-        $pasien->alamat = $request->alamat;
-        $pasien->nomor_hp = $request->nomor_hp;
-        $pasien->save();
-        //cek kode adm terakhir
-        $kodeAdm = \App\Models\Administrasi::orderBy('id', 'desc')->first();
-        $kode = 'ADM0001';
-        if ($kodeAdm) {
-            $kode = 'ADM' . sprintf('%04d', $kodeAdm->id + 1);
         }
-
-        $poli = \App\Models\Poli::findOrfail($request->poli_id);
-        $adm = new \App\Models\Administrasi();
-        $adm->kode_administrasi = $kode;
-        $adm->poli = $poli->nama;
-        $adm->pasien_id = $pasien->id;
-        $adm->tanggal = $request->tanggal;
-        $adm->keluhan = strip_tags($request->keluhan);
-        $adm->dokter_id = $poli->dokter_id;
-        $adm->biaya = $poli->biaya;
-        $adm->save();
-        DB::commit();
-        flash('Registrasi Berhasil, Silahkan datang pada tanggal ' . $request->tanggal . ' untuk melakukan pemeriksaan');
-        return back();
-    }
 
     /**
      * Display the specified resource.
