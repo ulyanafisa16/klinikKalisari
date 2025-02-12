@@ -25,10 +25,10 @@ class Administrasi extends Model
         ]);
     }
 
-    public function poli()
-    {
-        return $this->belongsTo(Poli::class)->withDefault([
-            'nama' => 'Data sudah dihapus',
-        ]);
-    }
+    // public function poli()
+    // {
+    //     return $this->belongsTo(Poli::class)->withDefault([
+    //         'nama' => 'Data sudah dihapus',
+    //     ]);
+    // }
 }

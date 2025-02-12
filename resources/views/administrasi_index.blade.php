@@ -38,15 +38,15 @@
                                         <dt class="col-md-4">Nama Pasien</dt>
                                         <dd class="col-md-8">: {{ $item->pasien->nama_pasien }}</dd>
 
-                                        {{-- <dt class="col-md-4">NIK</dt>
-                                        <dd class="col-md-8">: {{ $item->pasien->nik}}</dd> --}}
+                                        <dt class="col-md-4">NIK</dt>
+                                        <dd class="col-md-8">: {{ $item->pasien->nik}}</dd>
 
                                         <dt class="col-md-4">Nomor HP</dt>
                                         <dd class="col-md-8">: {{ $item->pasien->nomor_hp }}</dd>
 
                                         <dt class="col-md-4">Tujuan Poli</dt>
-                                        <dd class="col-md-8">: {{ $item->poli }}</dd>
-
+                                        <dd class="col-md-8">: {{ $item->dokter->poli->nama ?? 'Poli tidak ditemukan' }}</dd>
+                                        
                                         <dt class="col-md-4">Dokter</dt>
                                         <dd class="col-md-8">: {{ $item->dokter->nama_dokter }}</dd>
                                     </dl>

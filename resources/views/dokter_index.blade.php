@@ -40,7 +40,7 @@
                                 </div>
                             </td>
                             <td>
-                                {{-- {{ $item->administrasi->count() }} --}}
+                                {{ $item->administrasi->count() }}
                             </td>
                             <td>
                                 <a href="/dokter/{{ $item->id }}" class="btn btn-info">

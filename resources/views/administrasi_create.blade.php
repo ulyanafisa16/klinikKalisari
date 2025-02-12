@@ -13,11 +13,6 @@
                     <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') ?? date('Y-m-d') }}">
                     <span class="text-danger">{{ $errors->first('tanggal') }}</span>
                 </div>
-                {{-- <div class="form-group mt-3">
-                    <label for="alamat">NIK</label>
-                    <input type="text" name="nik" class="form-control" value="{{ old('nik') }}" required>
-                    <span class="text-danger">{{ $errors->first('nik') }}</span>
-                </div> --}}
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label for="pasien_id">Pilih Pasien atau <a href="/pasien/create" target="blank">Buat
@@ -55,7 +50,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
          $(document).ready(function() {
-        $('#pasien_id').change(function() {
+            $('#pasien_id').change(function() {
     var pasienId = $(this).val();
     if (pasienId) {
         $.ajax({
@@ -63,16 +58,26 @@
             type: 'GET',
             dataType: 'json',
             success: function(response) {
-                $('#dokter_id').empty();
-                $('#dokter_id').append(
-                    $('<option>', {
-                        value: response.doctor.id,
-                        text: response.doctor.nama_dokter
-                    })
-                );
-            },
+    console.log('Full Response:', response); // Debug response
+
+    $('#dokter_id').empty();
+    if (response.doctor) {
+        $('#dokter_id').append(
+            $('<option>', {
+                value: response.doctor.id,
+                text: response.doctor.nama_dokter + ' - ' + (response.doctor.nama_poli ?? 'Tidak Ada Poli')
+            })
+        );
+    } else {
+        $('#dokter_id').append('<option value="">Data tidak ditemukan</option>');
+    }
+},
+
             error: function(xhr, status, error) {
+                console.error('Error Details:', xhr.responseJSON);
+                console.error('Status:', status);
                 console.error('Error:', error);
+                alert('Gagal mengambil data: ' + (xhr.responseJSON ? xhr.responseJSON.error : error));
             }
         });
     }

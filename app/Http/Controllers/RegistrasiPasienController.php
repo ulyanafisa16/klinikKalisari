@@ -18,12 +18,12 @@ class RegistrasiPasienController extends Controller
      */
     public function create()
     {
-        // $data['list_jk'] = [
-        //     'Pria' => 'Pria',
-        //     'Wanita' => 'Wanita'
-        // ];
-        // $data['dokter'] = \App\Models\Dokter::all();
-        // $data['poli'] = \App\Models\Poli::all();
+        $data['list_jk'] = [
+            'Pria' => 'Pria',
+            'Wanita' => 'Wanita'
+        ];
+        $data['dokter'] = \App\Models\Dokter::all();
+        $data['poli'] = \App\Models\Poli::all();
         return view('registrasipasien_create');
     }
 

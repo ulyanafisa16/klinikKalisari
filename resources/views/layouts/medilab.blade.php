@@ -384,6 +384,7 @@
       </div>
         @include('flash::message')
         @yield('content')
+        @yield('scripts') 
 
       </div>
 

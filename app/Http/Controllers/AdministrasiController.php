@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pasien;
+use App\Models\Dokter;
 
 class AdministrasiController extends Controller
 {
@@ -14,11 +15,14 @@ class AdministrasiController extends Controller
     public function index()
 {
     if (Auth::user()->role == 'dokter') {
-        $data['administrasi'] = \App\Models\Administrasi::where('dokter_id', Auth::user()->dokter->id)
+        $data['administrasi'] = \App\Models\Administrasi::with(['pasien', 'dokter'])
+            ->where('dokter_id', Auth::user()->dokter->id)
             ->paginate(50);
     } else {
-        $data['administrasi'] = \App\Models\Administrasi::orderBy('tanggal', 'desc')->paginate(50);
-    }
+        $data['administrasi'] = \App\Models\Administrasi::with(['pasien', 'dokter'])
+            ->orderBy('tanggal', 'desc')
+            ->paginate(50);
+    }    
 
     $data['judul'] = 'Data Administrasi';
     return view('administrasi_index', $data);
@@ -39,22 +43,13 @@ class AdministrasiController extends Controller
      */
     public function store(Request $request)
     {
+    //  dd($request->all()); 
         $validasiData = $request->validate([
             'pasien_id' => 'required',
             'dokter_id' => 'required',
             'tanggal' => 'required',
             'keluhan' => 'required',
-            // 'nik'     => 'required',
         ]);
-
-    //     $pasien = \App\Models\Pasien::find($request->pasien_id) 
-    //       ?? \App\Models\Pasien::where('nik', $request->nik)->first();
-    //     if (!$pasien) {
-    //     $pasien = new \App\Models\Pasien();
-    //     $pasien->nik = $request->nik;
-    // // Tambahkan data lain yang relevan, seperti nama, alamat, dll.
-    //     $pasien->save();
-    //     }
 
         $dokter = \App\Models\Dokter::findOrfail($request->dokter_id);
         $kodeAdm = \App\Models\Administrasi::orderBy('id', 'desc')->first();
@@ -64,7 +59,7 @@ class AdministrasiController extends Controller
         }
         $adm = new \App\Models\Administrasi();
         $adm->kode_administrasi = $kode;
-        $adm->poli_id = $request->poli_id;
+        // $adm->poli_id = $request->poli_id;
         $adm->pasien_id = $request->pasien_id;
         $adm->tanggal = $request->tanggal;
         $adm->keluhan = strip_tags($request->keluhan);
@@ -76,16 +71,28 @@ class AdministrasiController extends Controller
     }
 
     public function getPoliByPasien($id)
-    {
-        $patient = \App\Models\Pasien::with('dokter')->find($id);
+{
+    $pasien = Pasien::find($id);
 
-        return response()->json([
-            'doctor' => [
-                'id' => $patient->dokter->id,
-                'nama_dokter' => $patient->dokter->nama_dokter
-            ]
-        ]);
+    if (!$pasien) {
+        return response()->json(['error' => 'Pasien tidak ditemukan'], 404);
     }
+
+    $doctor = Dokter::where('id', $pasien->dokter_id)->with('poli')->first();
+
+    if (!$doctor) {
+        return response()->json(['error' => 'Dokter tidak ditemukan'], 404);
+    }
+
+    return response()->json([
+        'doctor' => [
+            'id' => $doctor->id,
+            'nama_dokter' => $doctor->nama_dokter,
+            'nama_poli' => $doctor->poli->nama ?? 'Poli Tidak Ditemukan'
+        ]
+    ]);
+}
+
     
     /**
      * Display the specified resource.

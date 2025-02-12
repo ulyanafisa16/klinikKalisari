@@ -252,7 +252,7 @@
                                     <div>
                                         <div class="small text-gray-500">{{ $item->tanggal->format('d F Y') }}</div>
                                         <span class="font-weight-bold">{{ $item->pasien->nama_pasien }} berobat ke
-                                            {{ $item->poli }}</span>
+                                            {{  $item->dokter->poli->nama }}</span>
                                     </div>
                                 </a>
                                 @empty
