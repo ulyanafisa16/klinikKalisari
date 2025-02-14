@@ -4,6 +4,7 @@ use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\ProfilController;
@@ -39,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/getDokterByPoli/{poliId}', [PasienController::class, 'getDokterByPoli']);
     Route::get('/getJadwalByDokter/{dokterId}', [PasienController::class, 'getJadwalByDokter']);
     Route::get('/get-poli-by-pasien/{id}', [AdministrasiController::class, 'getPoliByPasien']);
+    Route::get('laporan/administrasi', [LaporanController::class, 'index'])->name('laporan.adm');
+
 
 });
 
