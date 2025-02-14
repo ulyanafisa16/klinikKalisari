@@ -32,8 +32,8 @@ class RegistrasiPasienController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //validasi inputan
+{
+    try {
         $validasiData = $request->validate([
             'nama_pasien' => 'required',
             'jenis_kelamin' => 'required',
@@ -41,62 +41,78 @@ class RegistrasiPasienController extends Controller
             'nomor_hp' => 'required',
             'dokter_id' => 'required|exists:dokters,id',
             'alamat' => 'required',
-            'nik' => 'required|digits:16|unique:pasiens,nik', 
-            'poli_id' => 'required|exists:polis,id', // Validasi poli
-            'jadwal_id' => 'required|exists:jadwal_dokters,id', // Validasi jadwal
-            'jam_kunjungan' => 'required|date_format:H:i',
+            'nik' => 'required|digits:16|unique:pasiens,nik',
+            'poli_id' => 'required|exists:polis,id',
+            'jadwal_id' => 'required|exists:jadwal_dokters,id',
+            'jam_kunjungan' => 'required',
             'tipe_pemeriksaan' => 'required|in:Klinik,Homecare',
         ]);
-        try {
-            DB::beginTransaction();
+
+        DB::beginTransaction();
         
-            // Proses penyimpanan data pasien
-            $kodeQuery = \App\Models\Pasien::orderBy('id', 'desc')->first();
-            $kode = 'P0001';
-            if ($kodeQuery) {
-                $kode = 'P' . sprintf('%04d', $kodeQuery->id + 1);
-            }
-        
-            $pasien = new \App\Models\Pasien();
-            $pasien->kode_pasien = $kode;
-            $pasien->nama_pasien = $request->nama_pasien;
-            $pasien->jenis_kelamin = $request->jenis_kelamin;
-            $pasien->status = $request->status ?? 'Aktif';
-            $pasien->alamat = $request->alamat;
-            $pasien->tipe_pemeriksaan = $request->tipe_pemeriksaan;
-            $pasien->jam_kunjungan = $request->jam_kunjungan;
-            $pasien->jadwal_id = $request->jadwal_id;
-            $pasien->nik = $request->nik;
-            $pasien->poli_id = $request->poli_id;
-            $pasien->dokter_id = $request->dokter_id;
-            $pasien->nomor_hp = $request->nomor_hp;
-            $pasien->save();
-        
-            // Proses penyimpanan administrasi
-            $kodeAdm = \App\Models\Administrasi::orderBy('id', 'desc')->first();
-            $kode = 'ADM0001';
-            if ($kodeAdm) {
-                $kode = 'ADM' . sprintf('%04d', $kodeAdm->id + 1);
-            }
-        
-            $adm = new \App\Models\Administrasi();
-            $adm->kode_administrasi = $kode;
-            $adm->pasien_id = $pasien->id;
-            $adm->tanggal = $request->tanggal ?? now(); // Pastikan tanggal ada
-            $adm->keluhan = strip_tags($request->keluhan);
-            $adm->dokter_id = $request->dokter_id;
-            $adm->save();
-        
-            DB::commit();
-            dd('Data berhasil disimpan'); // Jika ini muncul, berarti data sukses masuk
-        
-        } catch (\Exception $e) {
-            DB::rollBack();
-            dd('Error: ' . $e->getMessage()); // Munculkan error jika ada masalah
-        
-            
+        // Generate kode pasien
+        $kodeQuery = \App\Models\Pasien::orderBy('id', 'desc')->first();
+        $kode = 'P0001';
+        if ($kodeQuery) {
+            $kode = 'P' . sprintf('%04d', $kodeQuery->id + 1);
         }
+
+        // Generate nomor antrian
+        $tanggalHariIni = now()->toDateString();
+        $lastAntrianHariIni = \App\Models\Pasien::whereDate('created_at', $tanggalHariIni)
+            ->orderBy('nomor_antrian', 'desc')
+            ->first();
+
+        $nomorAntrian = 'A001-' . now()->format('Ymd'); // Format default: A001-20250214
+        if ($lastAntrianHariIni && $lastAntrianHariIni->nomor_antrian) {
+            $lastNomor = (int) substr($lastAntrianHariIni->nomor_antrian, 1, 3); // Mengambil 3 digit setelah "A"
+            $nomorAntrian = 'A' . sprintf('%03d', $lastNomor + 1) . '-' . now()->format('Ymd');
         }
+    
+        // Simpan data pasien
+        $pasien = new \App\Models\Pasien();
+        $pasien->kode_pasien = $kode;
+        $pasien->nomor_antrian = $nomorAntrian;  // Tambahkan nomor antrian
+        $pasien->nama_pasien = $request->nama_pasien;
+        $pasien->jenis_kelamin = $request->jenis_kelamin;
+        $pasien->tanggal_lahir = $request->tanggal_lahir;
+        $pasien->alamat = $request->alamat;
+        $pasien->tipe_pemeriksaan = $request->tipe_pemeriksaan;
+        $pasien->jam_kunjungan = $request->jam_kunjungan;
+        $pasien->jadwal_id = $request->jadwal_id;
+        $pasien->nik = $request->nik;
+        $pasien->poli_id = $request->poli_id;
+        $pasien->dokter_id = $request->dokter_id;
+        $pasien->nomor_hp = $request->nomor_hp;
+        $pasien->save();
+    
+        // Generate kode administrasi
+        $kodeAdm = \App\Models\Administrasi::orderBy('id', 'desc')->first();
+        $kodeAdministrasi = 'ADM0001';
+        if ($kodeAdm) {
+            $kodeAdministrasi = 'ADM' . sprintf('%04d', $kodeAdm->id + 1);
+        }
+    
+        // Simpan data administrasi
+        $adm = new \App\Models\Administrasi();
+        $adm->kode_administrasi = $kodeAdministrasi;
+        $adm->pasien_id = $pasien->id;
+        $adm->keluhan = strip_tags($request->keluhan);
+        $adm->tanggal = now();
+        $adm->dokter_id = $request->dokter_id;
+        $adm->save();
+    
+        DB::commit();
+        
+        flash('Pendaftaran berhasil')->success();
+        return redirect()->route('registrasipasien.create');
+        
+    } catch (\Exception $e) {
+        DB::rollBack();
+        flash('Terjadi kesalahan: ' . $e->getMessage())->error();
+        return back()->withInput();
+    }
+}
 
     /**
      * Display the specified resource.

@@ -86,6 +86,17 @@
                                     <option value="">Pilih Jadwal</option>
                                 </select>
                             </div>
+                            <div class="form-group mt-3">
+                                <label for="jam_kunjungan">Jam Kunjungan</label>
+                                <input type="time" name="jam_kunjungan" class="form-control" 
+                                    value="{{ old('jam_kunjungan') }}" required>
+                                <span class="text-danger">{{ $errors->first('jam_kunjungan') }}</span>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="keluhan">Keluhan Pasien</label>
+                                <textarea name="keluhan" class="form-control" rows="3">{{ old('keluhan') }}</textarea>
+                                <span class="text-danger">{{ $errors->first('keluhan') }}</span>
+                            </div>
 
                             <div class="form-group mt-3">
                                 <label for="tipe_pemeriksaan">Tipe Pemeriksaan</label>

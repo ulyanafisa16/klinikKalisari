@@ -34,7 +34,7 @@
                 </dl>
                 <dl class="row">
                     <dt class="col-sm-3">Poli Kunjungan</dt>
-                    <dd class="col-sm-9">: {{ $administrasi->poli }}</dd>
+                    <dd class="col-sm-9">: {{ $administrasi->dokter->poli->nama }}</dd>
                 </dl>
                 <dl class="row">
                     <dt class="col-sm-3">Dokter</dt>
