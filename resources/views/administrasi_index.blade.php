@@ -35,6 +35,9 @@
                                 <td>{{ $item->id }}</td>
                                 <td>
                                     <dl class="row">
+                                        <dt class="col-md-4">Nomor Antrian</dt>
+                                        <dd class="col-md-8">: {{ $item->pasien->nomor_antrian }}</dd>
+
                                         <dt class="col-md-4">Nama Pasien</dt>
                                         <dd class="col-md-8">: {{ $item->pasien->nama_pasien }}</dd>
 
@@ -69,6 +72,11 @@
                                     <a href="/administrasi/{{ $item->id }}/edit" class="btn btn-primary">
                                         Diagnosis
                                     </a>
+                                    <a href="{{ route('administrasi.print', $item->id) }}" 
+                                        class="btn btn-info" 
+                                        target="_blank">
+                                         Cetak Antrian
+                                     </a>
                                     @if (auth()->user()->role == 'admin')
                                         <form action="{{ route('administrasi.destroy', $item->id) }}" method="POST"
                                             class="d-inline"

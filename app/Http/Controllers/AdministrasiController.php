@@ -141,4 +141,10 @@ class AdministrasiController extends Controller
         flash('Data sudah dihapus')->success();
         return back();
     }
+
+    public function printAntrian($id)
+{
+    $administrasi = \App\Models\Administrasi::with(['pasien', 'dokter.poli'])->findOrFail($id);
+    return view('print_antrian', compact('administrasi'));
+}
 }

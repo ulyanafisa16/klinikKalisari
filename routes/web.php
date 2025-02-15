@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/getJadwalByDokter/{dokterId}', [PasienController::class, 'getJadwalByDokter']);
     Route::get('/get-poli-by-pasien/{id}', [AdministrasiController::class, 'getPoliByPasien']);
     Route::get('laporan/administrasi', [LaporanController::class, 'index'])->name('laporan.adm');
+    Route::get('/administrasi/{id}/print', [AdministrasiController::class, 'printAntrian'])->name('administrasi.print');
+
 
 
 });
