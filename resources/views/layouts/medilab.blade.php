@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Index - Medilab Bootstrap Template</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
@@ -283,18 +284,20 @@
       <div class="container">
 
         <div class="row gy-4">
-
+          @foreach($poli as $item)
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item  position-relative">
-              <div class="icon">
-                <i class="fas fa-heartbeat"></i>
+              <div class="service-item position-relative">
+                  <div class="icon">
+                      <i class="fas {{ $icons[$item->nama] ?? 'fa-hospital' }}"></i>
+                  </div>
+                  <h3>{{ $item->nama }}</h3>
+                  <p>{{ $item->deskripsi }}</p>
               </div>
-              <a href="#" class="stretched-link">
-                <h3>Nesciunt Mete</h3>
-              </a>
-              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-            </div>
-          </div><!-- End Service Item -->
+          </div>
+          @endforeach
+      </div>
+    {{-- </div>
+
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="service-item position-relative">
@@ -361,7 +364,7 @@
 
         </div>
 
-      </div>
+      </div> --}}
 
     </section><!-- /Services Section -->
 
@@ -501,33 +504,32 @@
       </div><!-- End Section Title -->
 
       <div class="container">
-
-      {{-- <div class="row">
-        @foreach ($dokter as $item)
-          <div class="col-lg-6">
-            <div class="team-member d-flex align-items-start">
-              <div class="pic">
-                @if ($item->foto == null)
-                <img src="{{ asset('frontend') }}/assets/img/doctors/doctors-1.jpg" class="img-fluid" 
-                alt="">
-                @else
-                    <img src="{{ Storage::url($item->foto) }}" class="img-fluid" alt="">
-                @endif
+        <div class="row">
+          @foreach ($dokter as $item)
+              <div class="col-lg-6">
+                  <div class="team-member d-flex align-items-start">
+                      <div class="pic">
+                          @if ($item->foto == null)
+                              <img src="{{ asset('frontend') }}/assets/img/doctors/doctors-1.jpg" class="img-fluid" alt="">
+                          @else
+                              <img src="{{ Storage::url($item->foto) }}" class="img-fluid" alt="">
+                          @endif
+                      </div>
+                      <div class="member-info">
+                          <h4>{{ $item->nama_dokter }}</h4>
+                          <span>Dokter {{ $item->poli->nama ?? 'Umum' }}</span>
+                          <p>{{ $item->kampus }}</p>
+                          <div class="social">
+                              <a href="{{ $item->twitter ?? '#' }}"><i class="bi bi-twitter-x"></i></a>
+                              <a href="{{ $item->facebook ?? '#' }}"><i class="bi bi-facebook"></i></a>
+                              <a href="{{ $item->instagram ?? '#' }}"><i class="bi bi-instagram"></i></a>
+                              <a href="{{ $item->tiktok ?? '#' }}"> <i class="bi bi-linkedin"></i></a>
+                          </div>
+                      </div>
+                  </div>
               </div>
-              <div class="member-info">
-                <h4>{{ $item->nama_dokter }}</h4>
-                <span>Dokter {{ $item->spesialis }}</span>
-                <p>{{ $item->kampus }}</p>
-                <div class="social">
-                  <a href="{{ $item->twitter }}"><i class="bi bi-twitter-x"></i></a>
-                  <a href="{{ $item->facebook }}"><i class="bi bi-facebook"></i></a>
-                  <a href="{{ $item->instagram }}"><i class="bi bi-instagram"></i></a>
-                  <a href="{{ $item->tiktok }}"> <i class="bi bi-linkedin"></i> </a>
-                </div>
-              </div>
-            </div>
-        @endforeach
-      </div><!-- End Team Member --> --}}
+          @endforeach
+      </div>
 
           {{-- <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
             <div class="team-member d-flex align-items-start">

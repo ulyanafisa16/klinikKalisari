@@ -117,7 +117,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const poliSelect = document.querySelector('select[name="poli_id"]');
     const dokterSelect = document.querySelector('select[name="dokter_id"]');
     const jadwalSelect = document.querySelector('select[name="jadwal_id"]');
-
+    const jamKunjunganInput = document.querySelector('input[name="jam_kunjungan"]');
+    
+    // Array untuk menyimpan jam yang sudah dibooking
+    let bookedTimes = [];
+    
     // Reset dropdown yang tergantung
     function resetDokter() {
         dokterSelect.innerHTML = '<option value="">Pilih Dokter</option>';
@@ -126,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function resetJadwal() {
         jadwalSelect.innerHTML = '<option value="">Pilih Jadwal</option>';
+        jamKunjunganInput.value = ''; // Reset jam kunjungan
     }
 
     // Menangani pemilihan Poli
@@ -161,18 +166,65 @@ document.addEventListener('DOMContentLoaded', function() {
                 data.jadwals.forEach(jadwal => {
                     const option = document.createElement('option');
                     option.value = jadwal.id;
-                    // Format tanggal dengan baik
                     option.textContent = `${jadwal.hari} - ${jadwal.jam_mulai} s/d ${jadwal.jam_selesai}`;
-                jadwalSelect.appendChild(option);
-                    });
-                    option.textContent = `${tanggal} - ${jadwal.jam_mulai} s/d ${jadwal.jam_selesai}`;
                     jadwalSelect.appendChild(option);
                 });
             })
             .catch(error => console.error('Error:', error));
     });
 
+    // Fungsi untuk mengecek ketersediaan jam
+    async function checkJamKunjungan() {
+        const dokter_id = dokterSelect.value;
+        const jadwal_id = jadwalSelect.value;
+        const tanggal = new Date().toISOString().split('T')[0]; // Tanggal hari ini
+        
+        if (!dokter_id || !jadwal_id) return;
+        
+        try {
+            const response = await fetch('/check-jam-kunjungan', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({
+                    dokter_id,
+                    jadwal_id,
+                    tanggal
+                })
+            });
+            
+            const data = await response.json();
+            bookedTimes = data.bookedTimes;
+            
+            // Set min dan max time berdasarkan jadwal yang dipilih
+            const jadwalText = jadwalSelect.selectedOptions[0].text;
+            const [jamMulai, jamSelesai] = jadwalText.split(' - ')[1].split(' s/d ');
+            
+            jamKunjunganInput.min = jamMulai;
+            jamKunjunganInput.max = jamSelesai;
+            jamKunjunganInput.value = ''; // Reset jam kunjungan
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    
+    // Event listener untuk input jam kunjungan
+    jamKunjunganInput.addEventListener('change', function() {
+        const selectedTime = this.value;
+        
+        if (bookedTimes.includes(selectedTime)) {
+            alert('Jam ini sudah dibooking. Silakan pilih jam lain.');
+            this.value = '';
+        }
+    });
+    
+    // Panggil checkJamKunjungan ketika jadwal dipilih
+    jadwalSelect.addEventListener('change', checkJamKunjungan);
+
     // Reset field yang tergantung pada saat halaman dimuat
     resetDokter();
+});
 </script>
 @endsection

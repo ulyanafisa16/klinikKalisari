@@ -130,4 +130,10 @@ class DokterController extends Controller
         flash('Data berhasil dihapus');
         return back();
     }
+
+    public function publicIndex()
+{
+    $dokter = Dokter::with('poli')->get();
+    return view('frontend.doctors', compact('dokter'));
+}
 }

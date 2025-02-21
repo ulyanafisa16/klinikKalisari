@@ -133,6 +133,27 @@ class PasienController extends Controller
     {
         //
     }
+    // PasienController.php
+public function checkJamKunjungan(Request $request)
+{
+    $tanggal = $request->tanggal;
+    $dokter_id = $request->dokter_id;
+    $jadwal_id = $request->jadwal_id;
+    
+    // Ambil semua jam kunjungan yang sudah diambil
+    $bookedTimes = \App\Models\Pasien::where('dokter_id', $dokter_id)
+        ->where('jadwal_id', $jadwal_id)
+        ->whereDate('created_at', $tanggal)
+        ->pluck('jam_kunjungan')
+        ->map(function($time) {
+            return date('H:i', strtotime($time));
+        })
+        ->toArray();
+    
+    return response()->json([
+        'bookedTimes' => $bookedTimes
+    ]);
+}
 
     /**
      * Show the form for editing the specified resource.

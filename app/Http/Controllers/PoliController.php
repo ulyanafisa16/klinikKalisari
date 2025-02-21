@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Poli;
 
 class PoliController extends Controller
 {
@@ -88,4 +89,23 @@ class PoliController extends Controller
         flash('Data berhasil dihapus');
         return back();
     }
+
+    public function publicIndex()
+{
+    $poli = Poli::all();
+    $icons = [
+        'Poli Umum' => 'fa-stethoscope',
+        'Poli Gigi' => 'fa-tooth',
+        'Poli Anak' => 'fa-baby',
+        'Poli Mata' => 'fa-eye',
+        'Poli THT' => 'fa-ear-deaf',
+        'Poli Jantung' => 'fa-heartbeat',
+        'Poli Kandungan' => 'fa-person-pregnant',
+        'Poli Syaraf' => 'fa-brain',
+        'Poli Orthopedi' => 'fa-bone',
+        'Poli Kulit' => 'fa-allergies'
+    ];
+    
+    return view('frontend.services', compact('poli', 'icons'));
+}
 }

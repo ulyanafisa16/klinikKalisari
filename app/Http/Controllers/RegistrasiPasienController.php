@@ -69,6 +69,17 @@ class RegistrasiPasienController extends Controller
             $nomorAntrian = 'A' . sprintf('%03d', $lastNomor + 1) . '-' . now()->format('Ymd');
         }
     
+        $existingAppointment = \App\Models\Pasien::where('dokter_id', $request->dokter_id)
+        ->where('jadwal_id', $request->jadwal_id)
+        ->whereDate('created_at', now())
+        ->where('jam_kunjungan', $request->jam_kunjungan)
+        ->exists();
+        
+    if ($existingAppointment) {
+        return back()->withInput()->withErrors([
+            'jam_kunjungan' => 'Jam kunjungan ini sudah dibooking.'
+        ]);
+    }
         // Simpan data pasien
         $pasien = new \App\Models\Pasien();
         $pasien->kode_pasien = $kode;

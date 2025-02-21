@@ -42,9 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-poli-by-pasien/{id}', [AdministrasiController::class, 'getPoliByPasien']);
     Route::get('laporan/administrasi', [LaporanController::class, 'index'])->name('laporan.adm');
     Route::get('/administrasi/{id}/print', [AdministrasiController::class, 'printAntrian'])->name('administrasi.print');
-
-
-
+    Route::post('/check-jam-kunjungan', [PasienController::class, 'checkJamKunjungan']);
+    Route::get('/doctors', [DokterController::class, 'publicIndex'])->name('doctors.public');
+Route::get('/services', [PoliController::class, 'publicIndex'])->name('services.public');
 });
 
 
