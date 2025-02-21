@@ -106,6 +106,6 @@ class PoliController extends Controller
         'Poli Kulit' => 'fa-allergies'
     ];
     
-    return view('frontend.services', compact('poli', 'icons'));
+    return view('medilab.services', compact('poli', 'icons'));
 }
 }

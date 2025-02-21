@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdministrasiController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalController;
@@ -19,6 +20,7 @@ Route::resource('registrasipasien', RegistrasiPasienController::class);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 // Grup middleware untuk semua rute yang memerlukan autentikasi
 Route::middleware('auth')->group(function () {
@@ -44,8 +46,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/administrasi/{id}/print', [AdministrasiController::class, 'printAntrian'])->name('administrasi.print');
     Route::post('/check-jam-kunjungan', [PasienController::class, 'checkJamKunjungan']);
     Route::get('/doctors', [DokterController::class, 'publicIndex'])->name('doctors.public');
-Route::get('/services', [PoliController::class, 'publicIndex'])->name('services.public');
+    Route::get('/services', [PoliController::class, 'publicIndex'])->name('services.public');
 });
+
+Route::resource('blog', BlogController::class);
+Route::get('/single', [BlogController::class, 'single_blog'])->name('single');
 
 
 require __DIR__.'/auth.php';
