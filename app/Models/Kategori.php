@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kategori extends Model
 {
-    //
+    protected $fillable = ['name', 'slug', 'article_count'];
+
+    public function articles()
+    {
+        return $this->hasMany(Artikel::class);
+    }
 }
