@@ -11,8 +11,8 @@ class Artikel extends Model
         'slug',
         'content',
         'thumbnail',
-        'excerpt',
-        'category_id',
+        'ringkasan', // Note: your form uses 'ringkasan' but model has 'excerpt'
+        'kategori_id',
         'published_at',
         'status'
     ];
@@ -22,9 +22,9 @@ class Artikel extends Model
     ];
 
     public function category()
-    {
-        return $this->belongsTo(Kategori::class);
-    }
+{
+    return $this->belongsTo(Kategori::class, 'kategori_id');
+}
 
     public function comments()
     {

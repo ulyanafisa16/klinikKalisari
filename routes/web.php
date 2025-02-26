@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdministrasiController;
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PoliController;
@@ -39,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('profil', ProfilController::class);
     Route::resource('administrasi', AdministrasiController::class);
     Route::resource('jadwal', JadwalController::class);
+    Route::resource('artikel', ArtikelController::class);
+    Route::resource('kategori', KategoriController::class);
     Route::get('/getDokterByPoli/{poliId}', [PasienController::class, 'getDokterByPoli']);
     Route::get('/getJadwalByDokter/{dokterId}', [PasienController::class, 'getJadwalByDokter']);
     Route::get('/get-poli-by-pasien/{id}', [AdministrasiController::class, 'getPoliByPasien']);

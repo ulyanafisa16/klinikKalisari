@@ -8,8 +8,13 @@ class Kategori extends Model
 {
     protected $fillable = ['name', 'slug', 'article_count'];
 
-    public function articles()
+    public function artikels()
     {
-        return $this->hasMany(Artikel::class);
+        return $this->hasMany(Artikel::class, 'kategori_id');
+    }
+    public function updateArticleCount()
+    {
+        $this->article_count = $this->articles()->count();
+        $this->save();
     }
 }

@@ -131,13 +131,33 @@
                     <span>Tambah Administrasi</span></a>
             </li>
 
+            <li class="nav-item {{ Route::is('artikel.index') ? 'active' : '' }}">
+                <a class="nav-link" href="/artikel">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Artikel</span></a>
+            </li>
+            <li class="nav-item {{ Route::is('artikel.create') ? 'active' : '' }}">
+                <a class="nav-link" href="/artikel/create">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tambah Artikel</span></a>
+            </li>
+            <li class="nav-item {{ Route::is('kategori.index') ? 'active' : '' }}">
+                <a class="nav-link" href="/kategori">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Kategori</span></a>
+            </li>
+            <li class="nav-item {{ Route::is('kategori.create') ? 'active' : '' }}">
+                <a class="nav-link" href="/kategori/create">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tambah Kategori</span></a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <div class="sidebar-heading">
                 Laporan
             </div>
-
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
