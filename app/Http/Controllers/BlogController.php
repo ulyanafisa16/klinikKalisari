@@ -14,12 +14,12 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $articles = Artikel::with(['category', 'comments'])
+        $articles = Artikel::with(['category'])
             ->published()
             ->orderBy('published_at', 'desc')
             ->paginate(6);
             
-        $categories = Kategori::withCount('articles')->get();
+        $categories = Kategori::withCount('artikels')->get();
         
         $popularPosts = Artikel::published()
             ->orderBy('view_count', 'desc')

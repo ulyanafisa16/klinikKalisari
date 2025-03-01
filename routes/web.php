@@ -55,6 +55,11 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('blog', BlogController::class);
 Route::get('/single', [BlogController::class, 'single_blog'])->name('single');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
+Route::get('/blog/search', [BlogController::class, 'search'])->name('blog.search');
+Route::post('/blog/comment/{articleId}', [BlogController::class, 'storeComment'])->name('blog.comment.store');
 
 
 require __DIR__.'/auth.php';
