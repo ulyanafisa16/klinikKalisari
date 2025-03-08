@@ -8,7 +8,7 @@ class Kategori extends Model
 {
     protected $fillable = ['name', 'slug', 'article_count'];
 
-    public function artikels()
+    public function articles()
     {
         return $this->hasMany(Artikel::class, 'kategori_id');
     }

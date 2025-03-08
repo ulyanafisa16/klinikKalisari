@@ -45,7 +45,12 @@
                                         <dd class="col-md-8">: {{ $item->pasien->nik}}</dd>
 
                                         <dt class="col-md-4">Nomor HP</dt>
-                                        <dd class="col-md-8">: {{ $item->pasien->nomor_hp }}</dd>
+                                        <dd class="col-md-8">: 
+                                        <a href="https://wa.me/{{ $item->pasien->nomor_hp }}" target="_blank">
+                                         {{ $item->pasien->nomor_hp }}
+                                        </a>
+                                        </dd>
+
 
                                         <dt class="col-md-4">Tujuan Poli</dt>
                                         <dd class="col-md-8">: {{ $item->dokter->poli->nama ?? 'Poli tidak ditemukan' }}</dd>

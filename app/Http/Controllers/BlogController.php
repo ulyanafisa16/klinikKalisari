@@ -51,21 +51,21 @@ class BlogController extends Controller
      */
     public function show($slug)
     {
-        $article = Artikel::with(['category', 'comments' => function($query) {
-            $query->where('is_approved', true)
-                  ->orderBy('created_at', 'desc');
+        
+        $article = Artikel::with(['category' => function($query) {
+            $query->orderBy('created_at', 'desc');
         }])->where('slug', $slug)
            ->firstOrFail();
-
+    
         // Increment view count
         $article->incrementViewCount();
 
-        $relatedArticles = Artikel::where('category_id', $article->category_id)
-            ->where('id', '!=', $article->id)
-            ->limit(3)
-            ->get();
+        // $relatedArticles = Artikel::where('category_id', $article->category_id)
+        //     ->where('id', '!=', $article->id)
+        //     ->limit(3)
+        //     ->get();
 
-        return view('single_blog', compact('article', 'relatedArticles'));
+        return view('single_blog', compact('article'));
     }
 
     /**
@@ -92,10 +92,24 @@ class BlogController extends Controller
         //
     }
 
-    public function single_blog()
-    {
-        return view('single_blog');
-    }
+    // public function single_blog($slug)
+    // {
+    //     $article = Artikel::with(['category' => function($query) {
+    //         $query->where('is_approved', true)
+    //               ->orderBy('created_at', 'desc');
+    //     }])->where('slug', $slug)
+    //        ->firstOrFail();
+
+    //     // Increment view count
+    //     $article->incrementViewCount();
+
+    //     $relatedArticles = Artikel::where('category_id', $article->category_id)
+    //         ->where('id', '!=', $article->id)
+    //         ->limit(3)
+    //         ->get();
+
+    //     return view('single_blog', compact('article', 'relatedArticles'));
+    // }
 
     public function storeComment(Request $request, $articleId)
     {
@@ -133,6 +147,7 @@ class BlogController extends Controller
 
         return view('blog_artikel', compact('articles', 'category'));
     }
+    
     public function search(Request $request)
     {
         $query = $request->input('query');
