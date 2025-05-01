@@ -12,9 +12,17 @@ class Kategori extends Model
     {
         return $this->hasMany(Artikel::class, 'kategori_id');
     }
+    public function artikels()
+    {
+        return $this->hasMany(Artikel::class, 'kategori_id');
+    }
     public function updateArticleCount()
     {
         $this->article_count = $this->articles()->count();
         $this->save();
+    }
+    public function getArtikelsCountAttribute()
+    {
+        return $this->artikels()->count();
     }
 }
