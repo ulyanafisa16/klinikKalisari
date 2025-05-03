@@ -86,8 +86,11 @@
     </header>
 	
 
+    @php
+    $backgroundUrl = $article->thumbnail ? asset('storage/'.$article->thumbnail) : asset('novena/images/blog/blog-1.jpg');
+@endphp
 
-<section class="page-title bg-1">
+<section class="page-title bg-1" style="background-image: url('{{ $backgroundUrl }}');>
   <div class="overlay"></div>
   <div class="container">
     <div class="row">

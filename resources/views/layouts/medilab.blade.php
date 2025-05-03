@@ -45,14 +45,12 @@
     <div class="topbar d-flex align-items-center">
       <div class="container d-flex justify-content-center justify-content-md-between">
         <div class="contact-info d-flex align-items-center">
-          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:kalisarihealthcare@gmail.com">kalisarihealthcare@gmail.com</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>0822 9999 6577</span></i>
         </div>
         <div class="social-links d-none d-md-flex align-items-center">
-          <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          <a href="https://www.instagram.com/kalisarihealthcare/" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.tiktok.com/@klinikkalisarihealthcare?_t=8o8muvNKE8l&_r=1" class="tiktok"><i class="bi bi-tiktok"></i></a>
         </div>
       </div>
     </div><!-- End Top Bar -->
@@ -60,11 +58,12 @@
     <div class="branding d-flex align-items-center">
 
       <div class="container position-relative d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center me-auto">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo.png" alt=""> -->
-          <h1 class="sitename">Medilab</h1>
-        </a>
+        <h1 class="logo me-auto"><a href="#">
+          <img src="{{ asset('frontend/assets/img/logo.png') }}" alt="Kalisari Logo" class="img-fluid"
+              style="height: 80px; margin-right: 15px;">
+          <span style="letter-spacing: 3px"> Kalisari </span>
+          <h5 style="weight: 8px; margin-left: 57px">Healthcare</h5>
+      </a></h1>
 
         <nav id="navmenu" class="navmenu">
           <ul>
@@ -108,21 +107,25 @@
       <div class="container position-relative">
 
         <div class="welcome position-relative" data-aos="fade-down" data-aos-delay="100">
-          <h2>WELCOME TO MEDILAB</h2>
-          <p>We are team of talented designers making websites with Bootstrap</p>
+          <h2>WELCOME TO KALAISARI HEALTHCARE</h2>
+          <p>Klinik Pratama Sahabat Keluarga</p>
         </div><!-- End Welcome -->
 
         <div class="content row gy-4">
           <div class="col-lg-4 d-flex align-items-stretch">
             <div class="why-box" data-aos="zoom-out" data-aos-delay="200">
-              <h3>Why Choose Medilab?</h3>
+              <h3>Why Choose Klinik Kalisari?</h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-                Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
+                Klinik Pratama Kalisari Healthcare (KHC) sebagai penyelenggara layanan
+                kesehatan yang berdedikasi, kami hadir dengan misi utama untuk memberikan
+                pelayanan kesehatan yang prima dengan konsep kenyamanan dalam berobat
+                dan harga yang terjangkau. Kami percaya bahwa akses terhadap pelayanan
+                kesehatan berkualitas tidak seharusnya menjadi beban finansial yang berat bagi
+                masyarakat
               </p>
-              <div class="text-center">
+              {{-- <div class="text-center">
                 <a href="#about" class="more-btn"><span>Learn More</span> <i class="bi bi-chevron-right"></i></a>
-              </div>
+              </div> --}}
             </div>
           </div><!-- End Why Box -->
 
@@ -133,24 +136,24 @@
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box" data-aos="zoom-out" data-aos-delay="300">
                     <i class="bi bi-clipboard-data"></i>
-                    <h4>Corporis voluptates officia eiusmod</h4>
-                    <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
-                  </div>
+                    <p>Memberikan pelayanan kesehatan yang terjangkau, berkualitas
+                      dan komprehensif kepada masyarakat</p>
+                    </div>
                 </div><!-- End Icon Box -->
 
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box" data-aos="zoom-out" data-aos-delay="400">
                     <i class="bi bi-gem"></i>
-                    <h4>Ullamco laboris ladore pan</h4>
-                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
-                  </div>
+                    <p>Edukasi kesehatan dan pencegahan penyakit melalui program
+                      promosi kesehatan</p>
+                     </div>
                 </div><!-- End Icon Box -->
 
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box" data-aos="zoom-out" data-aos-delay="500">
                     <i class="bi bi-inboxes"></i>
-                    <h4>Labore consequatur incidid dolore</h4>
-                    <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                    <p>Menjalin kerjasama dengan mitra dan pihak terkait untuk
+                      meningkatkan aksesibilitas layanan kesehatan</p>
                   </div>
                 </div><!-- End Icon Box -->
 
@@ -221,32 +224,32 @@
           <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
             <i class="fa-solid fa-user-doctor"></i>
             <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Doctors</p>
+              <span>AKUNTABILITAS</span>
+              <p>KOMITMEN</p>
             </div>
           </div><!-- End Stats Item -->
 
           <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
             <i class="fa-regular fa-hospital"></i>
             <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="18" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Departments</p>
+              <span>LOYALITAS</span>
+              <p>INTEGRITAS</p>
             </div>
           </div><!-- End Stats Item -->
 
           <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
             <i class="fas fa-flask"></i>
             <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="12" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Research Labs</p>
+              <span>SOLIDARITAS</span>
+              <p>ADAPTABILITAS</p>
             </div>
           </div><!-- End Stats Item -->
 
           <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
             <i class="fas fa-award"></i>
             <div class="stats-item">
-              <span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Awards</p>
+              <span>RESPONSIF</span>
+              <p>INOVATIF</p>
             </div>
           </div><!-- End Stats Item -->
 
@@ -261,8 +264,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>Layanan Poli</h2>
+        <p>Siap melayani sesuai keluhan anda</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -290,9 +293,7 @@
 
         <div class="section-title">
           <h2>REGISTRASI PASIEN</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-              sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-              ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Silahkan melakukan REGISTRASI terlebih dahulu</p>
       </div>
         @include('flash::message')
         @yield('content')
@@ -408,8 +409,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Doctors</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>Dokter</h2>
+        <p>Klinik kami siap melayani anda dengan dokter-dokter yang profesional</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -446,8 +447,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Frequently Asked Questions</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>Pertanyaan yang Sering Diajukan</h2>
+        <p>Kenyamanan pasien is number one</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -459,53 +460,59 @@
             <div class="faq-container">
 
               <div class="faq-item faq-active">
-                <h3>Non consectetur a erat nam at lectus urna duis?</h3>
+                <h3>Apa saja layanan yang ditawarkan oleh klinik?</h3>
                 <div class="faq-content">
-                  <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
+                  <p>Klinik kami menyediakan berbagai layanan, termasuk pemeriksaan umum, vaksinasi,
+                    Khitan, dan perawatan khusus.
+                    Tim profesional kami yang berpengalaman siap memenuhi semua kebutuhan kesehatan
+                    Anda.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
 
               <div class="faq-item">
-                <h3>Feugiat scelerisque varius morbi enim nunc faucibus?</h3>
+                <h3>Jam berapa klinik operasional?</h3>
                 <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
+                  <p>    <a>Poli Umum : Senin - Sabtu = 08.00 - 20.00</a>
+                    <a>Poli Gigi : Senin - Sabtu = 14.00 - 20.00</a>
+                    <a>Poli KIA  : Kamis & Sabtu = 08.00 - 14.00</a>
+                    <a>Laboratorium : Senin - Sabtu = Pagi : 08.00 - 20.00
+                                                      Sore : 16.00 - 20.00
+                    </a>
+                    <a>Hari Minggu dan tanggal Merah libur</a></p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
 
               <div class="faq-item">
-                <h3>Dolor sit amet consectetur adipiscing elit pellentesque?</h3>
+                <h3>Bagaimana cara mendaftar online?</h3>
                 <div class="faq-content">
-                  <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
+                  <p>Anda dapat daftar di menu REGISTRASI PASIEN,
+                    Kami menawarkan penjadwalan online yang nyaman
+                    untuk menyesuaikan dengan gaya hidup Anda yang sibuk.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
 
               <div class="faq-item">
-                <h3>Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?</h3>
+                <h3>Apakah pasien bisa langsung datang ke
+                  klinik tanpa daftar online?</h3>
                 <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
+                  <p>Ya, kami menerima pasien tanpa daftar online.
+                    Namun, untuk memastikan waktu tunggu yang minimal,
+                    kami merekomendasikan untuk daftar online terlebih dahulu.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
 
               <div class="faq-item">
-                <h3>Tempus quam pellentesque nec nam aliquam sem et tortor?</h3>
+                <h3>Apakah klinik menerima asuransi?</h3>
                 <div class="faq-content">
-                  <p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in</p>
+                  <p>Ya, kami menerima sebagian besar rencana asuransi utama.
+                    Silakan hubungi kantor kami untuk memastikan apakah rencana asuransi Anda diterima.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
-
-              <div class="faq-item">
-                <h3>Perspiciatis quod quo quos nulla quo illum ullam?</h3>
-                <div class="faq-content">
-                  <p>Enim ea facilis quaerat voluptas quidem et dolorem. Quis et consequatur non sed in suscipit sequi. Distinctio ipsam dolore et.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
-
             </div>
 
           </div><!-- End Faq Column-->
@@ -668,8 +675,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Gallery</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>Fasilitas</h2>
+        <p>Fasilitas dan kegiatan Klinik Kalisari Health Care</p>
       </div><!-- End Section Title -->
 
       <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
@@ -678,64 +685,64 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="{{ asset('frontend') }}/assets/img/gallery/gallery-1.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="{{ asset('frontend') }}/assets/img/gallery/gallery-1.jpg" alt="" class="img-fluid">
+              <a href="/frontend/assets/img/gallery/galery1.jpg" class="glightbox" data-gallery="images-gallery">
+                <img src="/frontend/assets/img/gallery/galery1.jpg" alt="" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="{{ asset('frontend') }}/assets/img/gallery/gallery-2.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="{{ asset('frontend') }}/assets/img/gallery/gallery-2.jpg" alt="" class="img-fluid">
+              <a href="/frontend/assets/img/gallery/galery2.jpg" class="glightbox" data-gallery="images-gallery">
+                <img src="/frontend/assets/img/gallery/galery2.jpg" alt="" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="{{ asset('frontend') }}/assets/img/gallery/gallery-3.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="{{ asset('frontend') }}/assets/img/gallery/gallery-3.jpg" alt="" class="img-fluid">
+              <a href="/frontend/assets/img/gallery/galery3.jpg" class="glightbox" data-gallery="images-gallery">
+                <img src="/frontend/assets/img/gallery/galery3.jpg" alt="" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="{{ asset('frontend') }}/assets/img/gallery/gallery-4.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="{{ asset('frontend') }}/assets/img/gallery/gallery-4.jpg" alt="" class="img-fluid">
+              <a href="/frontend/assets/img/gallery/galery4.jpg" class="glightbox" data-gallery="images-gallery">
+                <img src="/frontend/assets/img/gallery/galery4.jpg" alt="" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="{{ asset('frontend') }}/assets/img/gallery/gallery-5.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="{{ asset('frontend') }}/assets/img/gallery/gallery-5.jpg" alt="" class="img-fluid">
+              <a href="/frontend/assets/img/gallery/galery5.jpg" class="glightbox" data-gallery="images-gallery">
+                <img src="/frontend/assets/img/gallery/galery5.jpg" alt="" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="{{ asset('frontend') }}/assets/img/gallery/gallery-6.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="{{ asset('frontend') }}/assets/img/gallery/gallery-6.jpg" alt="" class="img-fluid">
+              <a href="/frontend/assets/img/gallery/galery6.jpg" class="glightbox" data-gallery="images-gallery">
+                <img src="/frontend/assets/img/gallery/galery6.jpg" alt="" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="{{ asset('frontend') }}/assets/img/gallery/gallery-7.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="{{ asset('frontend') }}/assets/img/gallery/gallery-7.jpg" alt="" class="img-fluid">
+              <a href="/frontend/assets/img/gallery/galery7.jpg" class="glightbox" data-gallery="images-gallery">
+                <img src="/frontend/assets/img/gallery/galery7.jpg" alt="" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="{{ asset('frontend') }}/assets/img/gallery/gallery-8.jpg" class="glightbox" data-gallery="images-gallery">
-                <img src="{{ asset('frontend') }}/assets/img/gallery/gallery-8.jpg" alt="" class="img-fluid">
+              <a href="{{ asset('frontend') }}/assets/img/gallery/galery8.jpg" class="glightbox" data-gallery="images-gallery">
+                <img src="{{ asset('frontend') }}/assets/img/gallery/galery8.jpg" alt="" class="img-fluid">
               </a>
             </div>
           </div><!-- End Gallery Item -->
@@ -751,76 +758,58 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>Kontak</h2>
+        <p>Silahkan Hubungi Klinik Kami</p>
       </div><!-- End Section Title -->
 
       <div class="mb-5" data-aos="fade-up" data-aos-delay="200">
-        <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe style="border:0; width: 100%; height: 350px;"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.837107195792!2d106.8566782!3d-6.3330687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ed8b9c14261b%3A0xbaca66ee48dd8659!2sKlinik%20Pratama%20Kalisari%20Healthcare!5e0!3m2!1sen!2sid!4v1685873078762!5m2!1sen!2sid"
+        frameborder="0" allowfullscreen></iframe>
       </div><!-- End Google Maps -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row gy-4">
+        <div class="row mt-5">
 
           <div class="col-lg-4">
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-              <i class="bi bi-geo-alt flex-shrink-0"></i>
-              <div>
-                <h3>Location</h3>
-                <p>A108 Adam Street, New York, NY 535022</p>
-              </div>
-            </div><!-- End Info Item -->
+            <div class="info">
+                <div class="address">
+                    <i class="bi bi-geo-alt"></i>
+                    <h4>Location:</h4>
+                    <p>Jl.Kalisari No.20.Kel. Kalisari Kec.Pasar Rebo - Jakarta Timur</p>
+                </div>
 
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-              <i class="bi bi-telephone flex-shrink-0"></i>
-              <div>
-                <h3>Call Us</h3>
-                <p>+1 5589 55488 55</p>
-              </div>
-            </div><!-- End Info Item -->
+                <div class="email">
+                    <i class="bi bi-envelope"></i>
+                    <h4>Email:</h4>
+                    <p>kalisarihealthcare@gmail.com</p>
+                </div>
 
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
-              <i class="bi bi-envelope flex-shrink-0"></i>
-              <div>
-                <h3>Email Us</h3>
-                <p>info@example.com</p>
-              </div>
-            </div><!-- End Info Item -->
+                <div class="phone">
+                    <i class="bi bi-phone"></i>
+                    <h4>Call:</h4>
+                    <p>0822 9999 6577</p>
+                </div>
+
+            </div>
 
           </div>
 
-          <div class="col-lg-8">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-              <div class="row gy-4">
-
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+          <div class="col-lg-8 mt-5 mt-lg-0">
+            <div class="row">
+                <div class="col-6 col-md-6 d-flex justify-content-center">
+                    <img src="/frontend/assets/img/klinik.jpg" class="img-fluid custom-img"
+                        alt="Image 1">
                 </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                <div class="col-6 col-md-6 d-flex justify-content-center">
+                    <img src="/frontend/assets/img/klinik2.jpg" class="img-fluid custom-img"
+                        alt="Image 2">
                 </div>
+            </div>
 
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                </div>
 
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
-                </div>
-
-              </div>
-            </form>
-          </div><!-- End Contact Form -->
+        </div><!-- End Contact Form -->
 
         </div>
 
@@ -836,19 +825,17 @@
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">Medilab</span>
+            <span class="sitename">Kalisari Healthcare</span>
           </a>
           <div class="footer-contact pt-3">
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-            <p><strong>Email:</strong> <span>info@example.com</span></p>
+            <p>Jl.Kalisari No.20.Kel. Kalisari</p>
+            <p>Kec.Pasar Rebo, Jakarta Timur</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>0822 9999 6577</span></p>
+            <p><strong>Email:</strong> <span>kalisarihealthcare@gmail.com</span></p>
           </div>
           <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
+            <a href="https://www.tiktok.com/@klinikkalisarihealthcare?_t=8o8muvNKE8l&_r=1" ><i class="bi bi-tiktok"></i></a>
+            <a href="https://www.instagram.com/kalisarihealthcare/"><i class="bi bi-instagram"></i></a>
           </div>
         </div>
 
@@ -864,37 +851,25 @@
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Our Services</h4>
+          <h4>Layanan Kami</h4>
           <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="#">Poli Umum</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="#">Poli Gigi</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="#">Poli KIA</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="#">Periksa Hamil</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="#">Laboratorium</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="#">Sunat Modern</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="#">Vaksinasi</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="#">HomeCare</a></li>
           </ul>
         </div>
 
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Hic solutasetp</h4>
-          <ul>
-            <li><a href="#">Molestiae accusamus iure</a></li>
-            <li><a href="#">Excepturi dignissimos</a></li>
-            <li><a href="#">Suscipit distinctio</a></li>
-            <li><a href="#">Dilecta</a></li>
-            <li><a href="#">Sit quas consectetur</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Nobis illum</h4>
-          <ul>
-            <li><a href="#">Ipsam</a></li>
-            <li><a href="#">Laudantium dolorum</a></li>
-            <li><a href="#">Dinera</a></li>
-            <li><a href="#">Trodelas</a></li>
-            <li><a href="#">Flexo</a></li>
-          </ul>
-        </div>
+        <div class="col-lg-4 col-md-3 footer-newsletter">
+          <h4>Jam Operasional</h4>
+          <p>Senin - Sabtu</p>
+          <p>08.00 - 20.00</p>
+          <p>Hari Minggu dan tanggal Merah Libur</p>
+      </div>
 
       </div>
     </div>
