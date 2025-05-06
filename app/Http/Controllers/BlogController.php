@@ -60,12 +60,20 @@ class BlogController extends Controller
         // Increment view count
         $article->incrementViewCount();
 
+        // Get categories for sidebar
+        $categories = Kategori::withCount('artikels')->get();
+
         // $relatedArticles = Artikel::where('category_id', $article->category_id)
         //     ->where('id', '!=', $article->id)
         //     ->limit(3)
         //     ->get();
 
-        return view('single_blog', compact('article'));
+        $popularPosts = Artikel::published()
+            ->orderBy('view_count', 'desc')
+            ->limit(3)
+            ->get();
+
+        return view('single_blog', compact('article', 'categories', 'popularPosts'));
     }
 
     /**
@@ -145,7 +153,14 @@ class BlogController extends Controller
             ->orderBy('published_at', 'desc')
             ->paginate(6);
 
-        return view('blog_artikel', compact('articles', 'category'));
+         $categories = Kategori::withCount('artikels')->get();
+        
+        $popularPosts = Artikel::published()
+            ->orderBy('view_count', 'desc')
+            ->limit(3)
+            ->get();
+
+        return view('blog_artikel', compact('articles', 'category', 'categories', 'popularPosts'));
     }
     
     public function search(Request $request)
@@ -158,6 +173,13 @@ class BlogController extends Controller
             ->orderBy('published_at', 'desc')
             ->paginate(6);
 
-        return view('blog_artikel', compact('articles', 'query'));
+            $categories = Kategori::withCount('artikels')->get();
+        
+            $popularPosts = Artikel::published()
+                ->orderBy('view_count', 'desc')
+                ->limit(3)
+                ->get();
+
+        return view('blog_artikel', compact('articles', 'query', 'categories', 'popularPosts'));
     }
 }

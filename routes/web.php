@@ -25,7 +25,7 @@ Route::get('/dashboard', function () {
 
 
 // Grup middleware untuk semua rute yang memerlukan autentikasi
-Route::middleware('auth')->group(function () {
+// Route::middleware('auth')->group(function () {
     
     // Rute untuk mengedit, memperbarui, dan menghapus profil pengguna
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/check-jam-kunjungan', [PasienController::class, 'checkJamKunjungan']);
     Route::get('/doctors', [DokterController::class, 'publicIndex'])->name('doctors.public');
     Route::get('/services', [PoliController::class, 'publicIndex'])->name('services.public');
-});
+// });
 
 Route::resource('blog', BlogController::class);
 Route::get('/single', [BlogController::class, 'single_blog'])->name('single');
@@ -60,6 +60,7 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
 Route::get('/blog/search', [BlogController::class, 'search'])->name('blog.search');
 Route::post('/blog/comment/{articleId}', [BlogController::class, 'storeComment'])->name('blog.comment.store');
+
 
 
 require __DIR__.'/auth.php';

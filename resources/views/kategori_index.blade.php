@@ -46,13 +46,14 @@
                                     <td>{{ $kategori->slug }}</td>
                                     <td>{{ $kategori->articles_count }}</td>
                                     <td>
-                                        <a href="{{ route('kategori.edit', $kategori->id) }}" class="btn btn-info btn-sm">
+                                        <a href="{{ route('kategori.edit', $kategori->id) }}" class="btn btn-primary btn-sm me-2 mb-1">
                                             <i class="fas fa-edit"></i> Edit
                                         </a>
+                                        
                                         <form action="{{ route('kategori.destroy', $kategori->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?')">
+                                            <button type="submit" class="btn btn-danger btn-sm mb-1" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?')">
                                                 <i class="fas fa-trash"></i> Hapus
                                             </button>
                                         </form>

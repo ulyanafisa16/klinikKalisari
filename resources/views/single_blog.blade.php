@@ -74,7 +74,7 @@
     
             <nav id="navmenu" class="navmenu">
               <ul>
-                <li><a href="#hero" class="active">Home<br></a></li>
+                <li><a href="{{ route('registrasipasien.create') }}" class="active">Home<br></a></li>
     
             <a class="cta-btn d-none d-sm-block" href="{{ route('registrasipasien.create') }}">Make an Appointment</a>
 
@@ -215,63 +215,43 @@
 		</form>
 	</div>
 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
-	<div class="sidebar-widget search  mb-3 ">
-		<h5>Search Here</h5>
-		<form action="#" class="search-form">
-			<input type="text" class="form-control" placeholder="search">
-			<i class="ti-search"></i>
-		</form>
-	</div>
+</div>
+<div class="col-lg-4">
+
+<div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
+	<div class="sidebar-widget search mb-3">
+    <h5>Search Here</h5>
+    <form action="{{ route('blog.search') }}" method="GET" class="search-form">
+        <input type="text" class="form-control" name="query" placeholder="Search articles..." required>
+        <button type="submit" class="search-btn">
+            <i class="ti-search"></i>
+        </button>
+    </form>
+</div>
 
 
-	<div class="sidebar-widget latest-post mb-3">
-		<h5>Popular Posts</h5>
+  <div class="sidebar-widget latest-post mb-4">
+    <h5>Popular Posts</h5>
+    @foreach($popularPosts as $post)
+    <div class="py-2">
+        <span class="text-sm text-muted">{{ $post->published_at->format('d M Y') }}</span>
+        <h6 class="my-2"><a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a></h6>
+    </div>
+    @endforeach
+  </div>
 
-        <div class="py-2">
-        	<span class="text-sm text-muted">03 Mar 2018</span>
-            <h6 class="my-2"><a href="#">Thoughtful living in los Angeles</a></h6>
-        </div>
-
-        <div class="py-2">
-       		<span class="text-sm text-muted">03 Mar 2018</span>
-            <h6 class="my-2"><a href="#">Vivamus molestie gravida turpis.</a></h6>
-        </div>
-
-        <div class="py-2">
-        	<span class="text-sm text-muted">03 Mar 2018</span>
-            <h6 class="my-2"><a href="#">Fusce lobortis lorem at ipsum semper sagittis</a></h6>
-        </div>
-	</div>
-
-	<div class="sidebar-widget category mb-3">
-		<h5 class="mb-4">Categories</h5>
-
-		<ul class="list-unstyled">
-		  <li class="align-items-center">
-		    <a href="#">Medicine</a>
-		    <span>(14)</span>
-		  </li>
-		  <li class="align-items-center">
-		    <a href="#">Equipments</a>
-		    <span>(2)</span>
-		  </li>
-		  <li class="align-items-center">
-		    <a href="#">Heart</a>
-		    <span>(10)</span>
-		  </li>
-		  <li class="align-items-center">
-		    <a href="#">Free counselling</a>
-		    <span>(5)</span>
-		  </li>
-		  <li class="align-items-center">
-		    <a href="#">Lab test</a>
-		    <span>(5)</span>
-		  </li>
-		</ul>
-	</div>
+<!-- Categories Widget -->
+<div class="sidebar-widget category mb-4">
+  <h5 class="mb-4">Categories</h5>
+  <ul class="list-unstyled">
+      @foreach($categories as $category)
+      <li class="align-items-center">
+          <a href="{{ route('blog.category', $category->slug) }}">{{ $category->name }}</a>
+          <span>({{ $category->articles_count }})</span>
+      </li>
+      @endforeach
+  </ul>
+</div>
 
 
 	<div class="sidebar-widget tags mb-3">
@@ -323,83 +303,69 @@
 <!-- footer Start -->
 <footer id="footer" class="footer light-background">
 
-    <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">Medilab</span>
-          </a>
-          <div class="footer-contact pt-3">
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-            <p><strong>Email:</strong> <span>info@example.com</span></p>
-          </div>
-          <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
-          </div>
+  <div class="container footer-top">
+    <div class="row gy-4">
+      <div class="col-lg-4 col-md-6 footer-about">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <span class="sitename">Kalisari Healthcare</span>
+        </a>
+        <div class="footer-contact pt-3">
+          <p>Jl.Kalisari No.20.Kel. Kalisari</p>
+          <p>Kec.Pasar Rebo, Jakarta Timur</p>
+          <p class="mt-3"><strong>Phone:</strong> <span>0822 9999 6577</span></p>
+          <p><strong>Email:</strong> <span>kalisarihealthcare@gmail.com</span></p>
         </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Useful Links</h4>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
-          </ul>
+        <div class="social-links d-flex mt-4">
+          <a href="https://www.tiktok.com/@klinikkalisarihealthcare?_t=8o8muvNKE8l&_r=1" ><i class="bi bi-tiktok"></i></a>
+          <a href="https://www.instagram.com/kalisarihealthcare/"><i class="bi bi-instagram"></i></a>
         </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Our Services</h4>
-          <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Hic solutasetp</h4>
-          <ul>
-            <li><a href="#">Molestiae accusamus iure</a></li>
-            <li><a href="#">Excepturi dignissimos</a></li>
-            <li><a href="#">Suscipit distinctio</a></li>
-            <li><a href="#">Dilecta</a></li>
-            <li><a href="#">Sit quas consectetur</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Nobis illum</h4>
-          <ul>
-            <li><a href="#">Ipsam</a></li>
-            <li><a href="#">Laudantium dolorum</a></li>
-            <li><a href="#">Dinera</a></li>
-            <li><a href="#">Trodelas</a></li>
-            <li><a href="#">Flexo</a></li>
-          </ul>
-        </div>
-
       </div>
+
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Useful Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Terms of service</a></li>
+          <li><a href="#">Privacy policy</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Layanan Kami</h4>
+        <ul>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">Poli Umum</a></li>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">Poli Gigi</a></li>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">Poli KIA</a></li>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">Periksa Hamil</a></li>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">Laboratorium</a></li>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">Sunat Modern</a></li>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">Vaksinasi</a></li>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">HomeCare</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4 col-md-3 footer-newsletter">
+        <h4>Jam Operasional</h4>
+        <p>Senin - Sabtu</p>
+        <p>08.00 - 20.00</p>
+        <p>Hari Minggu dan tanggal Merah Libur</p>
     </div>
 
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Medilab</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href=“https://themewagon.com>ThemeWagon
-      </div>
     </div>
+  </div>
+
+  <div class="container copyright text-center mt-4">
+    <p>© <span>Copyright</span> <strong class="px-1 sitename">Medilab</strong> <span>All Rights Reserved</span></p>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you've purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+      Designed by <a href="https://bootstrapmade.com/">Ulya</a> Distributed by <a href=“https://themewagon.com>ThemeWagon
+    </div>
+  </div>
 
 </footer>
    

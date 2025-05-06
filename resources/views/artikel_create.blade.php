@@ -9,8 +9,10 @@
         min-height: 300px;
     }
     .thumbnail-preview {
-        max-width: 100%;
+        max-width: 100px;
         max-height: 200px;
+        object-fit: cover;
+        border-radius: 3px;
         display: block;
         margin-top: 10px;
     }
@@ -75,7 +77,7 @@
                                 <!-- Status -->
                                 <div class="mb-3">
                                     <label class="form-label">Status</label>
-                                    <div class="d-flex">
+                                    <div class="d-flex" style="gap: 1rem;">
                                         <div class="form-check me-3">
                                             <input class="form-check-input" type="radio" name="status" id="statusDraft" 
                                                 value="draft" {{ old('status', 'draft') == 'draft' ? 'checked' : '' }}>
@@ -118,18 +120,16 @@
                         </div>
 
                         <!-- Thumbnail Card -->
-                        <div class="card mb-3">
-                            <div class="card-header bg-light">
-                                <h6 class="mb-0">Gambar Thumbnail</h6>
+                        <div class="mb-3">
+                            <label for="thumbnail" class="form-label">Gambar Thumbnail</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="thumbnail" name="thumbnail" accept="image/*">
+                                <label class="custom-file-label" for="thumbnail">Pilih file</label>
                             </div>
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <input class="form-control" type="file" id="thumbnail" name="thumbnail" accept="image/*">
-                                    <div class="form-text">Ukuran optimal: 1200x800 pixel</div>
-                                    <div class="mt-2" id="thumbnailPreview"></div>
-                                </div>
-                            </div>
+                            <div class="form-text">Ukuran optimal: 1200x800 pixel</div>
+                            <div class="mt-2" id="thumbnailPreview"></div>
                         </div>
+                        
 
                         <!-- Summary Card -->
                         <div class="card mb-3">
@@ -218,5 +218,31 @@
             preview.innerHTML = '';
         }
     });
+
+    // function previewImage(input) {
+    // const preview = document.getElementById('thumbnailPreview');
+
+    // // Hapus semua gambar sebelumnya
+    // preview.innerHTML = '';
+
+    // if (input.files && input.files[0]) {
+    //     const reader = new FileReader();
+
+    //     reader.onload = function(e) {
+    //         const img = document.createElement('img');
+    //         img.src = e.target.result;
+    //         img.alt = 'Preview';
+    //         img.className = 'thumbnail-preview';
+    //         img.style.width = '100px';
+    //         img.style.height = '100px';
+    //         img.style.objectFit = 'cover';
+            
+    //         preview.appendChild(img);
+    //     }
+
+    //     reader.readAsDataURL(input.files[0]);
+    // }
+
+
 </script>
 @endsection

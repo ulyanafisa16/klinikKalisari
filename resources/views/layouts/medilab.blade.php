@@ -70,11 +70,11 @@
             <li><a href="#hero" class="active">Home<br></a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#departments">Departments</a></li>
+            {{-- <li><a href="#departments">Departments</a></li> --}}
             <li><a href="#doctors">Doctors</a></li>
             <li><a href="{{ url('/blog') }}">Blog</a></li>
             <li><a href="#contact">Contact</a></li>
-            @if (Route::has('login'))
+            {{-- @if (Route::has('login'))
                 @auth
                 <li><a href="{{ url('/home') }}">Dashboard</a></li>
                 @else
@@ -84,7 +84,7 @@
                     <li><a href="{{ route('register') }}">Register</a></li>
                     @endif
                 @endauth
-        @endif
+            @endif --}}
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
@@ -304,7 +304,7 @@
     </section><!-- /Appointment Section -->
 
     <!-- Departments Section -->
-    <section id="departments" class="departments section">
+    {{-- <section id="departments" class="departments section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -402,7 +402,7 @@
 
       </div>
 
-    </section><!-- /Departments Section -->
+    </section><!-- /Departments Section --> --}}
 
     <!-- Doctors Section -->
     <section id="doctors" class="doctors section">

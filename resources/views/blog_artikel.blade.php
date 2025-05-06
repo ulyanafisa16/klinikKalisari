@@ -215,34 +215,71 @@
 
 <!-- footer Start -->
 <footer id="footer" class="footer light-background">
-    <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">Medilab</span>
-          </a>
-          <div class="footer-contact pt-3">
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-            <p><strong>Email:</strong> <span>info@example.com</span></p>
-          </div>
-          <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
-          </div>
+
+  <div class="container footer-top">
+    <div class="row gy-4">
+      <div class="col-lg-4 col-md-6 footer-about">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <span class="sitename">Kalisari Healthcare</span>
+        </a>
+        <div class="footer-contact pt-3">
+          <p>Jl.Kalisari No.20.Kel. Kalisari</p>
+          <p>Kec.Pasar Rebo, Jakarta Timur</p>
+          <p class="mt-3"><strong>Phone:</strong> <span>0822 9999 6577</span></p>
+          <p><strong>Email:</strong> <span>kalisarihealthcare@gmail.com</span></p>
+        </div>
+        <div class="social-links d-flex mt-4">
+          <a href="https://www.tiktok.com/@klinikkalisarihealthcare?_t=8o8muvNKE8l&_r=1" ><i class="bi bi-tiktok"></i></a>
+          <a href="https://www.instagram.com/kalisarihealthcare/"><i class="bi bi-instagram"></i></a>
         </div>
       </div>
+
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Useful Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Terms of service</a></li>
+          <li><a href="#">Privacy policy</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-md-3 footer-links">
+        <h4>Layanan Kami</h4>
+        <ul>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">Poli Umum</a></li>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">Poli Gigi</a></li>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">Poli KIA</a></li>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">Periksa Hamil</a></li>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">Laboratorium</a></li>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">Sunat Modern</a></li>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">Vaksinasi</a></li>
+        <li><i class="bx bx-chevron-right"></i> <a href="#">HomeCare</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4 col-md-3 footer-newsletter">
+        <h4>Jam Operasional</h4>
+        <p>Senin - Sabtu</p>
+        <p>08.00 - 20.00</p>
+        <p>Hari Minggu dan tanggal Merah Libur</p>
     </div>
 
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Medilab</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
-      </div>
     </div>
+  </div>
+
+  <div class="container copyright text-center mt-4">
+    <p>© <span>Copyright</span> <strong class="px-1 sitename">Medilab</strong> <span>All Rights Reserved</span></p>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you've purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+      Designed by <a href="https://bootstrapmade.com/">Ulya</a> Distributed by <a href=“https://themewagon.com>ThemeWagon
+    </div>
+  </div>
+
 </footer>
    
 <!-- Essential Scripts -->
